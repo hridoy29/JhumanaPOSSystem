@@ -2736,7 +2736,6 @@ namespace POSsible
             Button catName = (Button)sender;
             frmItemLookUp oFrmItem = new frmItemLookUp(this, catName.Text);
             oFrmItem.ShowDialog();
-
             frm_refresh();
         }
 
