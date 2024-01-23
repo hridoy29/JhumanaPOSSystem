@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using UYSYSPOS.BusinessObjects;
+using UYSYSPOS.Models;
+
+
+namespace UYSYSPOS.Controllers
+{
+    class UserManager
+    {
+        public UserManager()
+        {
+        }
+
+        public List<CUser> getAllUser()
+        {
+            
+            List<CUser> lstUser = new List<CUser>();
+            try
+            {
+                UserModel usermodel = new UserModel();
+                DataSet dsUserList = usermodel.getAllUser();
+
+                foreach (DataRow row in dsUserList.Tables[0].Rows)
+                {
+                    CUser o_user = new CUser();
+                    o_user.UserID = (int)row["UserId"];
+                    if (row["Name"].ToString() != "")
+                        o_user.UserName = row["Name"].ToString();
+                    if (row["IsLoggedIn"].ToString() != "")
+                        o_user.IsLoggedIn = (bool)row["IsLoggedIn"];
+                    lstUser.Add(o_user);
+                }
+            }
+            catch (Exception xcp)
+            {
+
+            }
+            return lstUser;
+        }
+        public int updateUserList(List<CUser> lstUser)
+        {
+            int retval = -1;
+            try
+            {
+                UserModel usermodel = new UserModel();
+                retval = usermodel.updateUserList(lstUser);
+            }
+            catch (Exception xcp)
+            {
+                
+            }
+
+            return retval;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+
+CREATE  procedure [dbo].[uysys_sales_report_by_date]
+@invoicedate datetime
+as
+BEGIN TRY
+    SELECT COUNT(*) Noinvoice,
+    ISNULL(SUM(ISNULL(TotalPrice,0)),0) totalprice
+    FROM tblInvoice
+    WHERE datediff(d,@invoicedate,invoiceDate) = 0
+END TRY
+BEGIN CATCH
+    if XACT_STATE() <> 0
+    return 0
+end catch

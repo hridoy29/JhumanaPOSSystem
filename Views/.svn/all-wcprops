@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/uysysposrepo/!svn/ver/132/Views
+END
+ILoginView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/uysysposrepo/!svn/ver/21/Views/ILoginView.cs
+END
+IMeatLookUpView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/uysysposrepo/!svn/ver/126/Views/IMeatLookUpView.cs
+END
+IRefundView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/uysysposrepo/!svn/ver/41/Views/IRefundView.cs
+END
+IFruitLookUpView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/uysysposrepo/!svn/ver/15/Views/IFruitLookUpView.cs
+END
+IFishLookUpView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/uysysposrepo/!svn/ver/126/Views/IFishLookUpView.cs
+END
+IMainView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/uysysposrepo/!svn/ver/20/Views/IMainView.cs
+END
+IVegetableLookUpView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/uysysposrepo/!svn/ver/15/Views/IVegetableLookUpView.cs
+END
+IShiftStartView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/uysysposrepo/!svn/ver/20/Views/IShiftStartView.cs
+END
+ISafeFundView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/uysysposrepo/!svn/ver/20/Views/ISafeFundView.cs
+END
+IItemView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/uysysposrepo/!svn/ver/47/Views/IItemView.cs
+END
+IPluView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/uysysposrepo/!svn/ver/54/Views/IPluView.cs
+END
+ICustomerView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/uysysposrepo/!svn/ver/132/Views/ICustomerView.cs
+END
+ISupplierView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/uysysposrepo/!svn/ver/10/Views/ISupplierView.cs
+END
+IShiftEndView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/uysysposrepo/!svn/ver/20/Views/IShiftEndView.cs
+END
+IAuthorization.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/uysysposrepo/!svn/ver/41/Views/IAuthorization.cs
+END
+IDBSettingsView.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/uysysposrepo/!svn/ver/20/Views/IDBSettingsView.cs
+END

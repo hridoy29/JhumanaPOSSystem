@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/uysysposrepo/!svn/ver/151/Models
+END
+ICustomerModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/uysysposrepo/!svn/ver/132/Models/ICustomerModel.cs
+END
+ISupplierModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/uysysposrepo/!svn/ver/123/Models/ISupplierModel.cs
+END
+UserModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/uysysposrepo/!svn/ver/130/Models/UserModel.cs
+END
+ISalesModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/uysysposrepo/!svn/ver/151/Models/ISalesModel.cs
+END
+ISecurityModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/uysysposrepo/!svn/ver/40/Models/ISecurityModel.cs
+END
+ProductModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/uysysposrepo/!svn/ver/151/Models/ProductModel.cs
+END
+CustomerModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/uysysposrepo/!svn/ver/144/Models/CustomerModel.cs
+END
+SupplierModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/uysysposrepo/!svn/ver/143/Models/SupplierModel.cs
+END
+SalesModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/uysysposrepo/!svn/ver/151/Models/SalesModel.cs
+END
+SecurityModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/uysysposrepo/!svn/ver/75/Models/SecurityModel.cs
+END
+IProductModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/uysysposrepo/!svn/ver/128/Models/IProductModel.cs
+END

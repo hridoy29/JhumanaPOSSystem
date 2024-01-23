@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using UYSYSPOS.BusinessObjects;
+using Microsoft.ApplicationBlocks.Data;
+
+namespace UYSYSPOS.Models
+{
+    class UserModel
+    {
+        #region attributes
+        /// <summary>
+        /// SQL Stored procedure lists
+        /// </summary>
+        private static readonly string SQL_GET_ALL_USR = "uysyspos_get_all_user";
+        private static readonly string SQL_UPDATE_ALL_USR_LOGIN = "uysyspos_update_all_login_user";
+
+
+        /// <summary>
+        /// Parameter list
+        /// </summary>
+        private static readonly string PARM_USR_NAME = "@Name";
+        private static readonly string PARM_USR_ISLOGGEDIN = "@IsLoggedIn";
+        #endregion
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public UserModel()
+        {
+        }
+
+        /// <summary>
+        /// Retrives all user info
+        /// </summary>
+        /// <returns></returns>
+        public DataSet getAllUser()
+        {
+            DataSet dsUserList = null;
+            try
+            {
+                // Read the runtime setup.
+                POSConfiguration settings = new POSConfiguration();
+                // Execute the SQL statement.
+                dsUserList = SqlHelper.ExecuteDataset(settings.getConnectionstring(), CommandType.StoredProcedure, SQL_GET_ALL_USR);
+
+            }
+            catch (Exception xcp)
+            {
+                throw new Exception("Error occurred while retriving user list", xcp);
+                
+            }
+            return dsUserList;
+        }
+
+        public int updateUserList(List<CUser> lstuser)
+        {
+            POSConfiguration setting = new POSConfiguration();
+            SqlTransaction objTrans = null;
+            SqlConnection o_conn = new SqlConnection(setting.getConnectionstring());
+            try
+            {
+                o_conn.Open();
+                objTrans = o_conn.BeginTransaction();
+
+                foreach (CUser posuser in lstuser)
+                {
+                    SqlParameter[] arrParam = new SqlParameter[2];
+
+                    arrParam[0] = new SqlParameter(PARM_USR_NAME, posuser.UserName);
+                    arrParam[1] = new SqlParameter(PARM_USR_ISLOGGEDIN, posuser.IsLoggedIn);
+                    //pass connection string, storedprocedure name and parameter array
+                    SqlHelper.ExecuteNonQuery(setting.getConnectionstring(), CommandType.StoredProcedure, SQL_UPDATE_ALL_USR_LOGIN , arrParam);
+                }
+
+            }
+
+            catch (Exception Ex)
+            {
+
+                objTrans.Rollback();
+                string sError = Ex.Message.ToString();
+                return -1;
+
+            }
+            finally
+            {
+                o_conn.Close();
+            }
+
+            return 1;
+        
+        }
+    }
+}

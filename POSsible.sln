@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSsobile", "POSsobile.csproj", "{083A294C-462C-4AA6-BA52-0637AFFCF9C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSsible.BusinessObjects", "POSsible.BusinessObjects\POSsible.BusinessObjects.csproj", "{86FD73D9-EF0D-4461-B199-C225A0B5D587}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSsible.DAL", "POSsible.DAL\POSsible.DAL.csproj", "{0C5C3F0A-2274-4CC6-94F3-AE6E0240F405}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{083A294C-462C-4AA6-BA52-0637AFFCF9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{083A294C-462C-4AA6-BA52-0637AFFCF9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{083A294C-462C-4AA6-BA52-0637AFFCF9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{083A294C-462C-4AA6-BA52-0637AFFCF9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86FD73D9-EF0D-4461-B199-C225A0B5D587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86FD73D9-EF0D-4461-B199-C225A0B5D587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86FD73D9-EF0D-4461-B199-C225A0B5D587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86FD73D9-EF0D-4461-B199-C225A0B5D587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C5C3F0A-2274-4CC6-94F3-AE6E0240F405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C5C3F0A-2274-4CC6-94F3-AE6E0240F405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C5C3F0A-2274-4CC6-94F3-AE6E0240F405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C5C3F0A-2274-4CC6-94F3-AE6E0240F405}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

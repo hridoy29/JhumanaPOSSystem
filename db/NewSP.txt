@@ -1,0 +1,38 @@
+ALTER  procedure [dbo].[uysys_shiftend_Report_info]
+@shiftId int
+AS
+BEGIN TRY
+    DECLARE @ToTCardAmnt float
+    DECLARE @TotCashAmnt float
+    DECLARE @TotCashdiff float
+    DECLARE @TotNoSales int
+    
+    SELECT  @ToTCardAmnt=sum(ISNULL(dbo.tblPayment.CardAmount,0)) , 
+            @TotCashAmnt=sum(ISNULL(dbo.tblPayment.CashAmount,0))
+    FROM    dbo.tblInvoice INNER JOIN
+            dbo.tblPayment ON dbo.tblInvoice.invoiceId = dbo.tblPayment.invoiceId
+    WHERE shiftId=@shiftId 
+
+    SELECT @TotNoSales= sum(ISNULL(dbo.tblUserActivities.noSalePressed,0)) 
+    FROM   dbo.tblUserActivities INNER JOIN
+           dbo.tblUserLogins ON dbo.tblUserActivities.userLoginId = dbo.tblUserLogins.UserLoginId
+    WHERE tblUserLogins.ShiftId=@shiftId
+
+
+    SELECT @TotCashdiff=EndMoney-TotalCashSale+TotalChangeGiven-StartMoney+TotalSafeDrop
+    FROM dbo.tblShift 
+    WHERE shiftId=@shiftId 
+    
+    SELECT *,isnull(@ToTCardAmnt,0) AS TotCardAmnt,
+    isnull(TotalSale,0) AS TotCashAmnt,
+    isnull(@TotNoSales,0) AS TotNoSales,
+    isnull(@TotCashdiff,0) AS TotCashdiff
+    FROM dbo.tblShift 
+    WHERE shiftId=@shiftId 
+
+END TRY
+BEGIN CATCH
+    
+    IF XACT_STATE() <> 0
+        RETURN 0
+END CATCH

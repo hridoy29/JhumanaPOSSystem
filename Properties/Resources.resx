@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Refresh_final_32x-25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Refresh_final_32x-25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="customer_-100-x-54" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\customer_-100-x-54.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="next-customer-please_-799w-" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\next-customer-please_-799w-.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="view-all-button-wide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\view-all-button-wide1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="process_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\process_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="right-arrow_51w-x-52h1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\right-arrow_51w-x-52h1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fruit-image_280w-x-238h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fruit-image_280w-x-238h.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="american-express_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\american-express_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="exit-button_-110-w-x-33h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\exit-button_-110-w-x-33h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="veg_-100w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\veg_-100w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="previous-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\previous-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="d20100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\d20100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel-current_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel-current_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bullet_cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bullet_cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="master-card_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\master-card_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="total-_-210w-x-53h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\total-_-210w-x-53h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="up-scroll_-64-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\up-scroll_-64-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delete_110w-x-33h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete_110w-x-33h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dayend_-64w-x-116h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dayend_-64w-x-116h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="d10-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\d10-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scrool-up_-51w-x-52h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\scrool-up_-51w-x-52h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refund_64w-x-116h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refund_64w-x-116h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="job_posting-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\job_posting-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="instant-discont_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\instant-discont_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="divider" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\divider.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh-icon_-22-w-x-20-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh-icon_-22-w-x-20-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="design-01-left-_-263w-x-271" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\design-01-left-_-263w-x-271.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="common-button_100w-x-57h1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\common-button_100w-x-57h1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="all-comon-button_-51w-x-52h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\all-comon-button_-51w-x-52h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh-icon_-32-w-x-25-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh-icon_-32-w-x-25-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search-icon_-32w-x-25-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search-icon_-32w-x-25-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scroll-down_-51w-x-52h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\scroll-down_-51w-x-52h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Enter_-64-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Enter_-64-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="familyneedlogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\familyneedlogo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search-buton_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search-buton_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ADD_110w-x-33h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ADD_110w-x-33h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="common-button_number_64w-x-" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\common-button_number_64w-x-.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fish_-100w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fish_-100w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="common-button_100w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\common-button_100w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="new-document-_32-x-25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\new-document-_32-x-25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="d100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\d100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="left-arrow_-51w-x-52-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\left-arrow_-51w-x-52-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UniversalEditButton3-22230410" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UniversalEditButton3-22230410.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="login-buton_78-w-x-43h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login-buton_78-w-x-43h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="backspace_-111w-x-51-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backspace_-111w-x-51-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clear_64w-x-57-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clear_64w-x-57-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Common button_end-shift_119w-x-37h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Common button_end-shift_119w-x-37h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CLR-button_-110-x-33h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CLR-button_-110-x-33h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_108-w-x-57-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_108-w-x-57-h.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="customer_-100w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\customer_-100w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fruit_-100w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fruit_-100w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="d5100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\d5100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="All-PLU_-100w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\All-PLU_-100w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Serch_78w-x-28h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Serch_78w-x-28h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ok-button_-110w-x-33h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ok-button_-110w-x-33h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Exit_110w-x-33h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Exit_110w-x-33h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="roots-logo_127w-x-78h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\roots-logo_127w-x-78h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="common-button_100w-x-57h2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\common-button_100w-x-57h2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Print_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Print_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel-_100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel-_100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="safe-drop_-64w-x-116h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\safe-drop_-64w-x-116h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Common-buton_ok_-70-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Common-buton_ok_-70-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image-_-vegiotable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image-_-vegiotable.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enter-buton_-409w-x-46h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\enter-buton_-409w-x-46h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search-icon_-22w-x-20-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search-icon_-22w-x-20-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search_32x25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search_32x25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="d50100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\d50100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="down-scroll_-64-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\down-scroll_-64-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Other_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Other_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Reset_110w-x-33h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Reset_110w-x-33h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="visa_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\visa_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Next_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Next_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="safe-drop_64w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\safe-drop_64w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="divider_-5w-x-611h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\divider_-5w-x-611h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back-sapce_64w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\back-sapce_64w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="design-right_-146w-x-332-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\design-right_-146w-x-332-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="right-arrow_51w-x-52h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\right-arrow_51w-x-52h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="eftos_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eftos_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="login_93x43" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login_93x43.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="120-x-64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\120-x-64.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="no-sale_-64w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\no-sale_-64w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="meat_100w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\meat_100w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search-icon1_-32w-x-25-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search-icon1_-32w-x-25-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="divider-_-826w-x-6h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\divider-_-826w-x-6h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back_64w-x-57-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\back_64w-x-57-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enter_-57w-x-100h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\enter_-57w-x-100h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Root-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Root-logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image_-147w-x-109h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image_-147w-x-109h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ND_-32-x-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ND_-32-x-24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="left-arrow_-51w-x-52-h1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\left-arrow_-51w-x-52-h1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clear-buton_-172w-x-45-h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clear-buton_-172w-x-45-h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thank-you__-405w-x-81h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\thank-you__-405w-x-81h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="print-past-fast_-64w-x-57h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\print-past-fast_-64w-x-57h.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search-icon1_-32w-x-25-h1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search-icon1_-32w-x-25-h1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Searchfinal-32x-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Searchfinal-32x-24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="close-button_-100-x-57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close-button_-100-x-57.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PoweredBy_Roots" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PoweredBy_Roots.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="view-all-button-wide1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\view-all-button-wide1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

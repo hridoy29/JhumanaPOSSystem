@@ -1,0 +1,3439 @@
+USE [familyneed]
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_find_all_supplier]    Script Date: 10/09/2008 14:49:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date: 31TH AUGUST 2008
+-- Description:    To insert a supplier
+-- =============================================
+CREATE procedure [dbo].[uysyspos_find_all_supplier]
+
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblSupplier ORDER BY SupplierName ASC
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_find_supplier_by_id]    Script Date: 10/09/2008 14:49:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date: 31TH AUGUST 2008
+-- Description:    To insert a supplier
+-- =============================================
+CREATE procedure [dbo].[uysyspos_find_supplier_by_id]
+@supplierId int
+
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblSupplier WHERE SupplierId=@supplierId
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_delete_product]    Script Date: 10/09/2008 14:49:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date: 31TH AUGUST 2008
+-- Description:    To insert a supplier
+-- =============================================
+CREATE procedure [dbo].[uysyspos_delete_product]
+@productId int
+
+AS
+BEGIN TRY
+	    	DELETE FROM dbo.tblProduct WHERE productId=@productId
+end try
+begin catch
+		SELECT 
+        ERROR_NUMBER() AS ErrorNumber,
+		ERROR_MESSAGE() AS ErrorMessage;
+end catch
+GO
+/****** Object:  Table [dbo].[tblUsers]    Script Date: 10/09/2008 14:50:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblUsers](
+	[UserId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Password] [varchar](255) NOT NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [varchar](50) NULL,
+	[Email] [varchar](50) NULL,
+	[IsLoggedIn] [bit] NOT NULL,
+	[HasAdminRight] [bit] NULL,
+	[HasRefundright] [bit] NULL,
+	[HasDiscountRight] [bit] NULL,
+	[EnteredBy] [int] NULL,
+	[EnteredTime] [datetime] NOT NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedTime] [datetime] NULL,
+	[DeactivatedTime] [datetime] NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [UniqueUser] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblImage]    Script Date: 10/09/2008 14:50:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblImage](
+	[ImageId] [varchar](1000) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Extension] [varchar](50) NOT NULL,
+	[Type] [varchar](50) NOT NULL,
+	[ImagePath] [varchar](1000) NULL,
+	[EnteredBy] [int] NOT NULL,
+	[EnteredTime] [datetime] NOT NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedTime] [datetime] NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblPaymentMethod]    Script Date: 10/09/2008 14:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblPaymentMethod](
+	[PaymentMethodId] [int] IDENTITY(1,1) NOT NULL,
+	[SavingsAcctAmount] [float] NULL,
+	[CreditCardAmount] [float] NULL,
+	[CashAmount] [float] NULL,
+	[TotalAmount] [float] NULL,
+	[ChangeGiven] [float] NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[UpdateTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_tblPaymentMethod] PRIMARY KEY CLUSTERED 
+(
+	[PaymentMethodId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_find_product]    Script Date: 10/09/2008 14:49:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date: 31TH AUGUST 2008
+-- Description:    To Find  ItemList By Product ID
+-- =============================================
+CREATE procedure [dbo].[uysyspos_find_product]
+@productId int 
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblProduct WHERE productId=@productId
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  Table [dbo].[tblPermissions]    Script Date: 10/09/2008 14:50:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblPermissions](
+	[PermissionId] [int] IDENTITY(1,1) NOT NULL,
+	[Permission] [varchar](50) NOT NULL,
+	[PermissionDescription] [varchar](255) NOT NULL,
+	[EnteredTime] [datetime] NOT NULL,
+	[UpdatedTime] [datetime] NULL,
+	[DeactivatedTime] [datetime] NULL,
+ CONSTRAINT [PK_Permissions] PRIMARY KEY CLUSTERED 
+(
+	[PermissionId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [UniquePermission] UNIQUE NONCLUSTERED 
+(
+	[Permission] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblGlobalVar]    Script Date: 10/09/2008 14:49:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblGlobalVar](
+	[Id] [int] NOT NULL,
+	[TerminalId] [int] NULL,
+	[StoreId] [int] NULL,
+	[GSTper] [float] NULL,
+	[FuelDiscount] [float] NULL,
+	[InstantDiscount] [float] NULL,
+	[ABNno] [varchar](50) NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[EnteredBy] [int] NULL,
+	[UpdatedTime] [smalldatetime] NULL,
+	[UpdatedBy] [int] NULL,
+ CONSTRAINT [PK_tblGlobalVar] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblRoles]    Script Date: 10/09/2008 14:50:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblRoles](
+	[RoleId] [int] IDENTITY(1,1) NOT NULL,
+	[Role] [varchar](50) NOT NULL,
+	[RoleDescription] [varchar](255) NOT NULL,
+	[EnteredTime] [datetime] NOT NULL,
+	[UpdatedTime] [datetime] NULL,
+	[DeactivatedTime] [datetime] NULL,
+ CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [UniqueRole] UNIQUE NONCLUSTERED 
+(
+	[Role] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblProductCategory]    Script Date: 10/09/2008 14:50:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblProductCategory](
+	[categoryId] [int] IDENTITY(1,1) NOT NULL,
+	[deptName] [varchar](100) NULL,
+	[description] [varchar](200) NULL,
+	[enteredtime] [smalldatetime] NULL,
+	[enteredby] [int] NULL,
+	[updatedtime] [smalldatetime] NULL,
+	[updatedby] [int] NULL,
+ CONSTRAINT [PK_tblDepartment] PRIMARY KEY CLUSTERED 
+(
+	[categoryId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_find_user]    Script Date: 10/09/2008 14:49:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   31TH AUGUST 2008
+-- Description:   To Find user
+-- =============================================
+CREATE procedure [dbo].[uysys_find_user]
+@userName varchar(50),
+@userPassword varchar(255)
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblUsers WHERE [Name]=@userName AND [Password]=@userPassword
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  Table [dbo].[tblStore]    Script Date: 10/09/2008 14:50:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblStore](
+	[ShoreId] [int] IDENTITY(1,1) NOT NULL,
+	[StoreName] [varchar](100) NULL,
+	[StoreAddress] [varchar](100) NULL,
+	[PhoneNo] [varchar](100) NULL,
+ CONSTRAINT [PK_tblStore] PRIMARY KEY CLUSTERED 
+(
+	[ShoreId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblTicket]    Script Date: 10/09/2008 14:50:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblTicket](
+	[ticketId] [int] NOT NULL,
+	[ticketName] [varchar](100) NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[EnteredBy] [varchar](50) NULL,
+	[UpdatedTime] [smalldatetime] NULL,
+	[UpdatedBy] [varchar](50) NULL,
+ CONSTRAINT [PK_tblTicket] PRIMARY KEY CLUSTERED 
+(
+	[ticketId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblUnitMeasure]    Script Date: 10/09/2008 14:50:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblUnitMeasure](
+	[unitMeasureId] [int] IDENTITY(1,1) NOT NULL,
+	[UnitMeasureName] [varchar](50) NOT NULL,
+	[enteredtime] [smalldatetime] NULL,
+	[enteredby] [varchar](50) NULL,
+	[updatedtime] [smalldatetime] NULL,
+	[updatedby] [varchar](50) NULL,
+ CONSTRAINT [PK_tblUnitMeasure] PRIMARY KEY CLUSTERED 
+(
+	[unitMeasureId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_get_all_items]    Script Date: 10/09/2008 14:49:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:   To Find  ItemList
+-- =============================================
+CREATE procedure [dbo].[uysys_product_get_all_items]
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblProduct 
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  Table [dbo].[tblLookupCode]    Script Date: 10/09/2008 14:50:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblLookupCode](
+	[LkpCodeId] [int] IDENTITY(1,1) NOT NULL,
+	[LkpFieldName] [varchar](50) NULL,
+	[LkpCode] [varchar](50) NULL,
+	[LkpDesc] [varchar](200) NULL,
+	[LkpOrder] [int] NULL,
+	[EnteredBy] [int] NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_tblLookupCode] PRIMARY KEY CLUSTERED 
+(
+	[LkpCodeId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblDamage]    Script Date: 10/09/2008 14:49:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblDamage](
+	[Damagedid] [int] IDENTITY(1,1) NOT NULL,
+	[Remarks] [varchar](200) NULL,
+	[DamageDate] [datetime] NULL,
+	[EnteredBy] [int] NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_tbldamage] PRIMARY KEY CLUSTERED 
+(
+	[Damagedid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_update_NoSales]    Script Date: 10/09/2008 14:49:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   13TH SEPTEMBER 2008
+-- Description:   To UPDATE NO SALES INFO
+-- =============================================
+CREATE procedure [dbo].[uysys_update_NoSales]
+@userLoginId int
+AS
+BEGIN TRY
+	 DECLARE @countdata int
+	 SELECT @countdata=count(*)  
+	 FROM  dbo.tblUserActivities  	
+	 WHERE 	userLoginId=@userLoginId 
+	 AND convert(nvarchar,activitydate,101)=convert(nvarchar,getdate(),101)
+
+	if (@countdata<>0)
+	BEGIN
+		UPDATE dbo.tblUserActivities 
+		SET noSalePressed=noSalePressed+1 
+		WHERE 	userLoginId=@userLoginId 
+		AND convert(nvarchar,activitydate,101)=convert(nvarchar,getdate(),101)
+	END
+	else
+	BEGIN
+	 INSERT INTO dbo.tblUserActivities 
+	 (
+		userLoginId,
+		activitydate,
+		noSalePressed	
+	 )	
+	values
+	(
+		@userLoginId,
+		Getdate(),
+		1
+	)
+	
+	END
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_find_supplier_by_name]    Script Date: 10/09/2008 14:49:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:   To Find Supplier By Supplier Name
+-- =============================================
+CREATE procedure [dbo].[uysyspos_find_supplier_by_name]
+@supplierName varchar(50)
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblSupplier WHERE [SupplierName]like '%'+@supplierName+'%' ORDER BY [SupplierName] ASC
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  Table [dbo].[tblCustomer]    Script Date: 10/09/2008 14:49:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblCustomer](
+	[customerId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NULL,
+	[street_no] [varchar](200) NULL,
+	[suburb] [varchar](100) NULL,
+	[city] [varchar](100) NULL,
+	[state] [varchar](100) NULL,
+	[postcode] [varchar](100) NULL,
+	[country] [varchar](100) NULL,
+	[mobile] [varchar](100) NULL,
+	[homephone] [varchar](100) NULL,
+	[sex] [bit] NULL,
+	[workphone] [varchar](100) NULL,
+	[enteredtime] [smalldatetime] NULL,
+	[enteredby] [int] NULL,
+	[updatedtime] [smalldatetime] NULL,
+	[updatedby] [int] NULL,
+ CONSTRAINT [PK_tblCustomer] PRIMARY KEY CLUSTERED 
+(
+	[customerId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblCustomerInvoice]    Script Date: 10/09/2008 14:49:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblCustomerInvoice](
+	[customerId] [int] NULL,
+	[invoiceId] [int] NULL,
+	[invoiceDate] [datetime] NULL,
+	[invoiceAmount] [float] NULL,
+	[pointsEarned] [float] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblSupplier]    Script Date: 10/09/2008 14:50:45 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblSupplier](
+	[SupplierId] [int] IDENTITY(1,1) NOT NULL,
+	[SupplierName] [varchar](50) NULL,
+	[TradingAs] [varchar](1000) NULL,
+	[ABN] [varchar](250) NULL,
+	[SupplierAddress] [varchar](200) NULL,
+	[ContactName] [varchar](50) NULL,
+	[PhoneNo] [varchar](100) NULL,
+	[email] [varchar](100) NULL,
+	[webadd] [varchar](250) NULL,
+	[comments] [varchar](250) NULL,
+	[EnteredBy] [int] NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_tblSupplier] PRIMARY KEY CLUSTERED 
+(
+	[SupplierId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_delete_supplier]    Script Date: 10/09/2008 14:49:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        S G MOBARAK 
+-- Create date: 30TH AUGUST 2008
+-- Description:    To delete a supplier
+-- =============================================
+
+CREATE procedure [dbo].[uysyspos_delete_supplier]
+(
+	@supplierId int = 0
+)
+as
+begin
+	begin try
+		-- Let's delete the supplier
+		delete from tblSupplier where SupplierId = @supplierId
+	end try
+	begin catch
+		SELECT 
+        ERROR_NUMBER() AS ErrorNumber,
+		ERROR_MESSAGE() AS ErrorMessage;
+	end catch
+end
+--Comments by Eftaker: either you use the output parameter which i recommend or use the return value BUT not both.
+GO
+/****** Object:  Table [dbo].[tblGroups]    Script Date: 10/09/2008 14:49:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblGroups](
+	[RoleId] [int] NOT NULL,
+	[GroupId] [int] IDENTITY(1,1) NOT NULL,
+	[GroupName] [varchar](50) NOT NULL,
+	[GroupDescription] [varchar](255) NOT NULL,
+	[GroupAccessCode] [varchar](1000) NULL,
+	[EnteredTime] [datetime] NOT NULL,
+	[UpdatedTime] [datetime] NULL,
+	[DeactivatedTime] [datetime] NULL,
+ CONSTRAINT [PK_Groups] PRIMARY KEY CLUSTERED 
+(
+	[GroupId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblRolePermissions]    Script Date: 10/09/2008 14:50:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblRolePermissions](
+	[RoleId] [int] NOT NULL,
+	[PermissionId] [int] NOT NULL,
+	[EnteredTime] [datetime] NOT NULL,
+	[UpdatedTime] [datetime] NULL,
+	[DeactivatedTime] [datetime] NULL,
+ CONSTRAINT [PK_RolePermissions] PRIMARY KEY CLUSTERED 
+(
+	[RoleId] ASC,
+	[PermissionId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblProduct]    Script Date: 10/09/2008 14:50:20 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblProduct](
+	[productId] [int] IDENTITY(1,1) NOT NULL,
+	[categorytId] [int] NOT NULL,
+	[barcodeNo] [varchar](100) NULL,
+	[name] [varchar](100) NULL,
+	[shortcode] [varchar](50) NULL,
+	[description] [varchar](1000) NULL,
+	[brand] [varchar](100) NULL,
+	[madeIn] [varchar](100) NULL,
+	[weight] [float] NULL,
+	[isGstItem] [bit] NULL,
+	[isexpireable] [bit] NULL,
+	[ticketType] [bit] NULL,
+	[unitCost] [float] NULL,
+	[unitPrice] [float] NULL,
+	[promoUnitPrice] [float] NULL,
+	[promoStartDate] [smalldatetime] NULL,
+	[promoEndDate] [smalldatetime] NULL,
+	[unitMeasureId] [int] NOT NULL,
+	[qtyInStock] [float] NULL,
+	[qtyInOrder] [float] NULL,
+	[minQty] [float] NULL,
+	[ProductImage] [image] NULL,
+	[enteredtime] [smalldatetime] NULL,
+	[enteredby] [int] NULL,
+	[updatedtime] [smalldatetime] NULL,
+	[updatedby] [int] NULL,
+ CONSTRAINT [PK_tblItems] PRIMARY KEY CLUSTERED 
+(
+	[productId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [uniq_barcode] UNIQUE NONCLUSTERED 
+(
+	[barcodeNo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1 for A4 ticket,0 For Self ticket' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'tblProduct', @level2type=N'COLUMN',@level2name=N'ticketType'
+GO
+/****** Object:  Table [dbo].[tblRefundProduct]    Script Date: 10/09/2008 14:50:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblRefundProduct](
+	[Refundid] [int] NOT NULL,
+	[productId] [int] NOT NULL,
+	[qty] [int] NULL,
+	[UnitPrice] [float] NULL,
+	[description] [varchar](200) NULL,
+	[EnteredBy] [int] NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_tblRefundProduct] PRIMARY KEY CLUSTERED 
+(
+	[Refundid] ASC,
+	[productId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblInvoiceProduct]    Script Date: 10/09/2008 14:50:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblInvoiceProduct](
+	[invoiceId] [int] NOT NULL,
+	[productId] [int] NOT NULL,
+	[qty] [float] NULL,
+	[unitPrice] [float] NULL,
+	[Status] [varchar](100) NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[Updatedatime] [smalldatetime] NULL,
+ CONSTRAINT [PK_tblInvoiceProduct] PRIMARY KEY CLUSTERED 
+(
+	[invoiceId] ASC,
+	[productId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblPayment]    Script Date: 10/09/2008 14:50:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblPayment](
+	[PaymentMethodId] [int] IDENTITY(1,1) NOT NULL,
+	[invoiceId] [int] NULL,
+	[Paymenttype] [int] NULL,
+	[CardAmount] [float] NULL,
+	[CashAmount] [float] NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[UpdateTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_tblPayment] PRIMARY KEY CLUSTERED 
+(
+	[PaymentMethodId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'0 for Cash, 1 for Card' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'tblPayment', @level2type=N'COLUMN',@level2name=N'Paymenttype'
+GO
+/****** Object:  Table [dbo].[tblRefund]    Script Date: 10/09/2008 14:50:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblRefund](
+	[Refundid] [int] IDENTITY(1,1) NOT NULL,
+	[invoiceId] [int] NULL,
+	[refundDate] [smalldatetime] NULL,
+	[AuthorizedBy] [int] NULL,
+	[RefundedBy] [int] NULL,
+	[RefundMethod] [varchar](50) NULL,
+	[EnteredTime] [smalldatetime] NULL,
+	[UpdatedTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_tblRefund] PRIMARY KEY CLUSTERED 
+(
+	[Refundid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblDamagedProduct]    Script Date: 10/09/2008 14:49:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblDamagedProduct](
+	[Damagedid] [int] NOT NULL,
+	[productId] [int] NOT NULL,
+	[qty] [float] NULL,
+	[unitcost] [float] NULL,
+	[description] [varchar](200) NULL,
+ CONSTRAINT [PK_tblDamagedProduct] PRIMARY KEY CLUSTERED 
+(
+	[Damagedid] ASC,
+	[productId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblUserGroups]    Script Date: 10/09/2008 14:50:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblUserGroups](
+	[UserId] [int] NOT NULL,
+	[GroupId] [int] NOT NULL,
+	[EnteredTime] [datetime] NOT NULL,
+	[UpdatedTime] [datetime] NULL,
+	[DeactivatedTime] [datetime] NULL,
+ CONSTRAINT [PK_UserGroups] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[GroupId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblPurchaseProduct]    Script Date: 10/09/2008 14:50:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblPurchaseProduct](
+	[purchaseId] [int] NOT NULL,
+	[productId] [int] NOT NULL,
+	[qty] [float] NULL,
+	[unitCost] [float] NULL,
+	[ExpireDate] [datetime] NULL,
+ CONSTRAINT [PK_tblPurchaseProduct] PRIMARY KEY CLUSTERED 
+(
+	[purchaseId] ASC,
+	[productId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblInvoice]    Script Date: 10/09/2008 14:50:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblInvoice](
+	[invoiceId] [int] IDENTITY(1,1) NOT NULL,
+	[shiftId] [int] NULL,
+	[userId] [int] NOT NULL,
+	[customerId] [int] NULL,
+	[invoiceDate] [smalldatetime] NULL,
+	[TotalPrice] [float] NULL,
+	[TotalGST] [float] NULL,
+	[changeGiven] [float] NULL,
+	[DiscountGiven] [varchar](50) NULL,
+	[DiscountAthorizedId] [int] NULL,
+	[description] [varchar](500) NULL,
+	[status] [varchar](200) NULL,
+	[updatedTime] [smalldatetime] NULL,
+	[updatedBy] [int] NULL,
+ CONSTRAINT [PK_tblInvoice_1] PRIMARY KEY CLUSTERED 
+(
+	[invoiceId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblUserLogins]    Script Date: 10/09/2008 14:50:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblUserLogins](
+	[UserLoginId] [int] IDENTITY(1,1) NOT NULL,
+	[ShiftId] [int] NULL CONSTRAINT [DF_tblUserLogins_ShiftId]  DEFAULT ((0)),
+	[UserId] [int] NOT NULL,
+	[UserLoginTime] [datetime] NOT NULL,
+	[UserLogoutTime] [datetime] NULL,
+	[UserTerminal] [varchar](200) NULL,
+ CONSTRAINT [PK_UserLogins] PRIMARY KEY CLUSTERED 
+(
+	[UserLoginId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblSafeDrop]    Script Date: 10/09/2008 14:50:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblSafeDrop](
+	[safeDropId] [int] IDENTITY(1,1) NOT NULL,
+	[SafeDropTime] [smalldatetime] NULL,
+	[Amount] [float] NULL,
+	[shiftId] [int] NULL,
+	[UserId] [int] NULL,
+ CONSTRAINT [PK_tblSafeDrop] PRIMARY KEY CLUSTERED 
+(
+	[safeDropId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblPurchase]    Script Date: 10/09/2008 14:50:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblPurchase](
+	[purchaseId] [int] IDENTITY(1,1) NOT NULL,
+	[status] [varchar](100) NULL,
+	[description] [varchar](500) NULL,
+	[orderDate] [smalldatetime] NULL,
+	[deliveryDate] [smalldatetime] NULL,
+	[shippingMethod] [varchar](100) NULL,
+	[shipTo] [varchar](200) NULL,
+	[supplierId] [int] NULL,
+	[totalCost] [float] NULL,
+	[enteredTime] [smalldatetime] NULL,
+	[enteredBy] [int] NULL,
+	[updatedTime] [smalldatetime] NULL,
+	[updatedBy] [int] NULL,
+ CONSTRAINT [PK_tblPurchase] PRIMARY KEY CLUSTERED 
+(
+	[purchaseId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblUserActivities]    Script Date: 10/09/2008 14:50:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblUserActivities](
+	[userLoginId] [int] NOT NULL,
+	[activitydate] [smalldatetime] NULL,
+	[noSalePressed] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblUserLoginAttempts]    Script Date: 10/09/2008 14:50:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblUserLoginAttempts](
+	[UserLoginId] [int] NULL,
+	[UserLoginAttemptId] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [varchar](50) NOT NULL,
+	[UserLoginAttemptTime] [datetime] NOT NULL,
+	[UserErrorMessage] [varchar](50) NULL,
+	[UserIP] [varchar](50) NULL,
+	[UserTerminal] [varchar](50) NULL,
+	[UserSite] [varchar](50) NULL,
+	[UserPlatform] [varchar](50) NULL,
+	[UserScreenResolution] [varchar](50) NULL,
+	[UserColorDepth] [varchar](50) NULL,
+ CONSTRAINT [PK_UserLoginAttempts] PRIMARY KEY CLUSTERED 
+(
+	[UserLoginAttemptId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblShift]    Script Date: 10/09/2008 14:50:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblShift](
+	[shiftId] [int] IDENTITY(1,1) NOT NULL,
+	[shiftName] [varchar](100) NULL,
+	[userId] [int] NULL,
+	[StartTime] [smalldatetime] NULL,
+	[EndTime] [smalldatetime] NULL,
+	[StartMoney] [float] NULL,
+	[EndMoney] [float] NULL,
+	[TotalChangeGiven] [float] NULL,
+	[TotalSafeDrop] [float] NULL,
+	[TotalSale] [float] NULL,
+	[TotalEftposSale] [float] NULL,
+	[TotalCashSale] [float] NULL,
+	[TotalVegiSale] [float] NULL,
+	[TotalGrocerySale] [float] NULL,
+	[TotalFruitSale] [float] NULL,
+	[TotalFishSale] [float] NULL,
+	[TotalMeatSale] [float] NULL,
+	[TotalDairySale] [float] NULL,
+	[TotalDairyOtherSale] [float] NULL,
+	[TotalTobaccoSale] [float] NULL,
+	[TotalDrinksSale] [float] NULL,
+	[TotalPhoneCardSale] [float] NULL,
+	[TotalDVDSale] [float] NULL,
+	[UpdatedTime] [smalldatetime] NULL,
+	[Userterminal] [varchar](200) NULL,
+ CONSTRAINT [PK_tblShift] PRIMARY KEY CLUSTERED 
+(
+	[shiftId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblEmployee]    Script Date: 10/09/2008 14:49:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblEmployee](
+	[employeeid] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[firstname] [varchar](100) NULL,
+	[lastname] [varchar](100) NULL,
+	[designation] [varchar](100) NULL,
+	[phone] [varchar](200) NULL,
+	[enteredtime] [smalldatetime] NULL,
+	[enteredby] [int] NULL,
+	[updatedtime] [smalldatetime] NULL,
+	[updatedby] [int] NULL,
+ CONSTRAINT [PK_tblEmployee] PRIMARY KEY CLUSTERED 
+(
+	[employeeid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[tblCreditCardPayment]    Script Date: 10/09/2008 14:49:44 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tblCreditCardPayment](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[PaymenthodId] [int] NULL,
+	[CardOwner] [varchar](50) NULL,
+	[CardNo] [varchar](50) NULL,
+	[CardExpire] [varchar](50) NULL,
+	[VerificationCode] [varchar](50) NULL,
+	[CardType] [varchar](50) NULL,
+	[AmountPaid] [float] NULL,
+ CONSTRAINT [PK_tblCreditCardPayment] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_shiftend_DeptWiseSales]    Script Date: 10/09/2008 14:49:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   13TH SEPTEMBER 2008
+-- Description:    To END SHIFT Department Wise Sales
+-- =============================================
+CREATE  procedure [dbo].[uysys_shiftend_DeptWiseSales]
+@shiftId int
+AS
+BEGIN TRY
+	DECLARE @gstper int
+	SELECT @gstper=GSTper FROM dbo.tblGlobalVar
+    /*SELECT IP.*,p.isGstItem,@gstper AS Gstper,
+	P.name,P.shortcode,PC.deptName,I.shiftId
+	FROM dbo.tblInvoice I INNER JOIN 
+    dbo.tblInvoiceProduct IP ON IP.invoiceId = I.invoiceId 
+	INNER JOIN	dbo.tblProduct P on IP.productId = P.productId
+    INNER JOIN dbo.tblProductCategory PC ON P.categorytId = PC.categoryId
+	WHERE I.shiftId=@shiftId */
+	SELECT SUM(ISNULL(IP.qty,0)*ISNULL(IP.unitPrice,0)) AS TotAmnt,p.isGstItem,@gstper AS Gstper,
+	PC.deptName
+	FROM dbo.tblInvoice I INNER JOIN 
+    dbo.tblInvoiceProduct IP ON IP.invoiceId = I.invoiceId 
+	INNER JOIN	dbo.tblProduct P on IP.productId = P.productId
+    INNER JOIN dbo.tblProductCategory PC ON P.categorytId = PC.categoryId
+	WHERE I.shiftId=@shiftId 
+	GROUP BY PC.deptName,p.isGstItem
+	/*AND I.invoiceId=IP.invoiceId
+	AND IP.productId=P.productId 
+    AND  P.categorytId = PC.categoryId
+	*/
+	
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		RETURN 0
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_find_by_ticket]    Script Date: 10/09/2008 14:49:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   7TH SEPTEMBER 2008
+-- Description:   FIND SELF TICKET BY DEPT
+-- =============================================
+CREATE procedure [dbo].[uysys_product_find_by_ticket]
+
+@categoryId int,
+@ticketId bit
+as
+BEGIN TRY
+    SELECT p.*,PC.deptName, UOM.UnitMeasureName 
+	FROM dbo.tblProduct P,
+	dbo.tblUnitMeasure UOM,dbo.tblProductCategory PC
+	WHERE P.unitMeasureId=UOM.unitMeasureId 
+	AND P.categorytId=PC.categoryId 
+	AND P.ticketType=@ticketId
+	AND P.categorytId=@categoryId 
+END TRY
+BEGIN CATCH
+    if XACT_STATE() <> 0
+	return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_profit_by_dept]    Script Date: 10/09/2008 14:49:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   7TH SEPTEMBER 2008
+-- Description:   To insert a supplier
+-- =============================================
+CREATE procedure [dbo].[uysys_product_profit_by_dept]
+
+---@departmentId int,
+@from datetime,
+@to datetime
+as
+BEGIN TRY
+	DECLARE @gstper int
+	SELECT @gstper=GSTper FROM dbo.tblGlobalVar
+    SELECT IP.*,p.isGstItem,@gstper AS Gstper,
+	P.name,P.shortcode,UOM.UnitMeasureName,PC.deptName
+	FROM dbo.tblInvoiceProduct IP,dbo.tblProduct P,
+	dbo.tblUnitMeasure UOM, dbo.tblProductCategory PC
+	WHERE convert(nvarchar,IP.EnteredTime,101) BETWEEN 
+	convert(nvarchar,@from,101) AND convert(nvarchar,@to,101) 
+	AND IP.productId=P.productId AND P.unitMeasureId=UOM.unitMeasureId 
+	AND P.categorytId=pc.categoryId
+END TRY
+BEGIN CATCH
+    if XACT_STATE() <> 0
+	return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_find_by_department_id]    Script Date: 10/09/2008 14:49:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date: 31TH AUGUST 2008
+-- Description:    To Find Product by Department Id
+-- Modified by : M. Arifur Rahman
+-- =============================================
+CREATE procedure [dbo].[uysys_product_find_by_department_id]
+@departmentId int 
+AS
+BEGIN TRY
+SELECT p.*,um.UnitMeasureName,pc.deptName 
+			FROM dbo.tblProduct p,dbo.tblUnitMeasure um, 
+			dbo.tblProductCategory pc WHERE categorytId=@departmentId 
+			AND p.categorytId=pc.categoryId	AND p.unitMeasureId=um.unitMeasureId
+			ORDER BY p.name 
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_department_find_all]    Script Date: 10/09/2008 14:49:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date: 31TH AUGUST 2008
+-- Description:    To insert a supplier
+-- =============================================
+CREATE procedure [dbo].[uysys_department_find_all]
+
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblProductCategory
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_endOfDay_DeptWiseSales]    Script Date: 10/09/2008 14:49:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   13TH SEPTEMBER 2008
+-- Description:    To END OF THE DAY Department Wise Sales
+-- =============================================
+CREATE  procedure [dbo].[uysys_endOfDay_DeptWiseSales]
+@UserTerminal varchar(200)
+AS
+BEGIN TRY
+	DECLARE @gstper int
+	SELECT @gstper=GSTper FROM dbo.tblGlobalVar
+
+	SELECT SUM(ISNULL(deptwsales.qty,0)*ISNULL(deptwsales.unitPrice,0)) AS TotAmnt,  
+		   deptwsales.deptName,deptwsales.isGstItem,@gstper AS Gstper 
+
+	FROM (SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, dbo.tblInvoice.invoiceDate, 
+						  dbo.tblUserLogins.UserTerminal, dbo.tblUserLogins.UserLoginTime, dbo.tblProduct.name, dbo.tblProduct.isGstItem, 
+						  dbo.tblProductCategory.deptName
+	FROM         dbo.tblInvoice INNER JOIN
+				  dbo.tblInvoiceProduct ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId INNER JOIN
+				  dbo.tblShift ON dbo.tblInvoice.shiftId = dbo.tblShift.shiftId INNER JOIN
+				  dbo.tblUserLogins ON dbo.tblShift.shiftId = dbo.tblUserLogins.ShiftId INNER JOIN
+				  dbo.tblProduct ON dbo.tblInvoiceProduct.productId = dbo.tblProduct.productId INNER JOIN
+				  dbo.tblProductCategory ON dbo.tblProduct.categorytId = dbo.tblProductCategory.categoryId) AS deptwsales
+
+	WHERE 
+	deptwsales.UserTerminal=@UserTerminal
+	AND
+	convert(nvarchar,deptwsales.UserLoginTime,101)=convert(nvarchar,getdate(),101)
+	AND
+	convert(nvarchar,deptwsales.invoiceDate,101)=convert(nvarchar,getdate(),101)
+	GROUP BY deptwsales.deptName,deptwsales.isGstItem
+
+--    SELECT SUM(ISNULL(IP.qty,0)*ISNULL(IP.unitPrice,0)) AS TotAmnt,
+--	p.isGstItem,@gstper AS Gstper,PC.deptName
+--	FROM dbo.tblInvoice I INNER JOIN
+--	(SELECT userid FROM dbo.tblUserLogins 
+--	WHERE convert(nvarchar,dbo.tblUserLogins.UserLoginTime,101)=convert(nvarchar,getdate(),101)
+--	AND UserTerminal=@UserTerminal) AS USR on I.userid=USR.userid
+--	INNER JOIN  dbo.tblInvoiceProduct IP ON IP.invoiceId = I.invoiceId 
+--	INNER JOIN	dbo.tblProduct P on IP.productId = P.productId
+--    INNER JOIN dbo.tblProductCategory PC ON P.categorytId = PC.categoryId
+--	
+--	GROUP BY PC.deptName,p.isGstItem
+
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		RETURN 0
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_Invoice_Poducts_find_by_InvoiceId]    Script Date: 10/09/2008 14:49:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        S G Mobarak
+-- Create date:   17TH SEPTEMBER 2008
+-- Description:   To FIND INVOICE PRODUCT
+-- =============================================
+CREATE PROCEDURE [dbo].[uysyspos_Invoice_Poducts_find_by_InvoiceId]
+@invoiceId int
+AS
+BEGIN TRY
+	    	SELECT iv.*,p.name,p.shortcode,p.description,
+			uom.UnitMeasureName	FROM dbo.tblInvoiceProduct iv,
+			dbo.tblProduct p,dbo.tblUnitMeasure uom
+			WHERE iv.invoiceId=@invoiceId AND iv.productId=p.productId AND 
+			p.unitMeasureId=uom.unitMeasureId
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_get_last_invoice]    Script Date: 10/09/2008 14:49:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   14TH SEPTEMBER 2008
+-- Description:    GET LAST INVOICE
+-- =============================================
+CREATE   procedure [dbo].[uysyspos_get_last_invoice]
+AS
+BEGIN TRY
+SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoice.userId, dbo.tblInvoice.customerId, dbo.tblInvoice.invoiceDate, dbo.tblInvoice.TotalPrice, 
+                      dbo.tblInvoice.TotalGST, dbo.tblInvoice.changeGiven, dbo.tblInvoice.DiscountGiven, dbo.tblInvoice.DiscountAthorizedId, dbo.tblInvoice.description, 
+                      dbo.tblInvoice.status, dbo.tblInvoice.updatedTime, dbo.tblInvoice.updatedBy, dbo.tblInvoiceProduct.productId, dbo.tblProduct.name, dbo.tblProduct.shortcode,
+					  dbo.tblProduct.description,dbo.tblInvoiceProduct.qty,dbo.tblInvoiceProduct.unitPrice,dbo.tblUnitMeasure.UnitMeasureName,
+					  dbo.tblInvoiceProduct.Status AS Expr1, dbo.tblInvoiceProduct.EnteredTime, dbo.tblInvoiceProduct.Updatedatime, 
+                      dbo.tblUsers.Name, dbo.tblPayment.Paymenttype, dbo.tblPayment.CardAmount, dbo.tblPayment.CashAmount
+FROM         dbo.tblInvoice INNER JOIN
+                      dbo.tblInvoiceProduct ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId INNER JOIN
+                      dbo.tblPayment ON dbo.tblInvoice.invoiceId = dbo.tblPayment.invoiceId INNER JOIN
+                      dbo.tblProduct ON dbo.tblInvoiceProduct.productId = dbo.tblProduct.productId INNER JOIN
+                      dbo.tblUnitMeasure ON dbo.tblProduct.unitMeasureId = dbo.tblUnitMeasure.unitMeasureId INNER JOIN
+                      dbo.tblUsers ON dbo.tblInvoice.userId = dbo.tblUsers.UserId
+WHERE tblInvoice.invoiceId=(Select max(tblInvoice.invoiceId) FROM tblInvoice)
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		RETURN 0
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_find_by_barcode]    Script Date: 10/09/2008 14:49:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   31TH AUGUST 2008
+-- Description:   To Find Product By Barcode
+-- =============================================
+CREATE procedure [dbo].[uysys_product_find_by_barcode]
+@barcodeNo varchar(100)
+AS
+BEGIN TRY
+	    	--SELECT * FROM dbo.tblProduct dbo.tbl WHERE [barcodeNo]=@barcodeNo
+			SELECT p.*,um.UnitMeasureName
+			FROM dbo.tblProduct p,dbo.tblUnitMeasure um
+			WHERE [barcodeNo]=@barcodeNo AND p.unitMeasureId=um.unitMeasureId
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_find_by_name_department]    Script Date: 10/09/2008 14:49:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date: 31TH AUGUST 2008
+-- Description:    To Find  ItemList By Product ID
+-- =============================================
+CREATE procedure [dbo].[uysys_product_find_by_name_department]
+@departmentId int, 
+@name varchar(100)
+AS
+BEGIN TRY
+	    	--SELECT * FROM dbo.tblProduct WHERE categorytId=@departmentId AND [name] like @name+'%'
+	SELECT p.*,um.UnitMeasureName 
+			FROM dbo.tblProduct p,dbo.tblUnitMeasure um
+			WHERE categorytId=@departmentId 
+			AND [name] like @name+'%' AND p.unitMeasureId=um.unitMeasureId
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_find_by_brand_department]    Script Date: 10/09/2008 14:49:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   31TH AUGUST 2008
+-- Description:   To Find Product By Depart and Brand
+-- =============================================
+CREATE procedure [dbo].[uysys_product_find_by_brand_department]
+@departmentId int,
+@brand varchar(100)
+AS
+BEGIN TRY
+	    	--SELECT * FROM dbo.tblProduct WHERE categorytId=@departmentId AND [brand] like @brand+'%'
+
+SELECT p.*,um.UnitMeasureName 
+			FROM dbo.tblProduct p,dbo.tblUnitMeasure um
+			WHERE categorytId=@departmentId 
+			AND [brand] like @brand+'%' AND p.unitMeasureId=um.unitMeasureId
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_find_by_barcode_department]    Script Date: 10/09/2008 14:49:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   31TH AUGUST 2008
+-- Description:   To Find Product By Depart and Barcode
+-- =============================================
+CREATE procedure [dbo].[uysys_product_find_by_barcode_department]
+@departmentId int,
+@barcodeNo varchar(100)
+AS
+BEGIN TRY
+	    	--SELECT * FROM dbo.tblProduct WHERE categorytId=@departmentId AND [barcodeNo]=@barcodeNo
+
+SELECT p.*,um.UnitMeasureName 
+			FROM dbo.tblProduct p,dbo.tblUnitMeasure um
+			WHERE categorytId=@departmentId 
+			AND [barcodeNo]=@barcodeNo AND p.unitMeasureId=um.unitMeasureId
+
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_measurement_find_all]    Script Date: 10/09/2008 14:49:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        S G Mobarak
+-- Create date: 31TH AUGUST 2008
+-- Description:    To retrieve measuremnets
+-- =============================================
+CREATE procedure [dbo].[uysys_measurement_find_all]
+
+AS
+begin try
+	SELECT * FROM dbo.tblUnitMeasure
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_find_refund_by_invoice_id]    Script Date: 10/09/2008 14:49:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   07TH SEPTEMBER 2008
+-- Description:   To FIND INVOICE PRODUCT
+-- =============================================
+CREATE PROCEDURE [dbo].[uysyspos_find_refund_by_invoice_id]
+@invoiceId int
+AS
+BEGIN TRY
+	    	SELECT iv.*,p.name,p.shortcode,p.description,
+			uom.UnitMeasureName	FROM dbo.tblInvoiceProduct iv,
+			dbo.tblProduct p,dbo.tblUnitMeasure uom
+			WHERE iv.invoiceId=@invoiceId AND iv.productId=p.productId AND 
+			p.unitMeasureId=uom.unitMeasureId
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_add_purchase_details]    Script Date: 10/09/2008 14:49:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:   INSERT DATA into Purchase Details Table
+-- =============================================
+CREATE procedure [dbo].[uysys_product_add_purchase_details]
+@purchaseId int, 
+@productId int, 
+@qty float, 
+@unitCost float, 
+@ExpireDate   datetime
+
+AS
+BEGIN TRY
+ begin transaction
+	    	INSERT INTO dbo.tblPurchaseProduct
+				(
+				[purchaseId],
+				[productId],
+				[qty],
+				[unitCost],
+				[ExpireDate]
+				)
+			VALUES
+				(
+				@purchaseId , 
+				@productId , 
+				@qty , 
+				@unitCost , 
+				@ExpireDate   
+				)
+
+			UPDATE dbo.tblProduct SET
+				unitCost=@unitCost,
+				qtyInStock=qtyInStock+@qty
+			WHERE productId=@productId
+
+commit transaction
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_store_refund]    Script Date: 10/09/2008 14:49:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   07TH SEPTEMBER 2008
+-- Description:   To STORE REFUND INORMATION
+-- =============================================
+CREATE PROCEDURE [dbo].[uysys_store_refund]
+@invoiceId int,
+@authorizedBy int,
+@refundedBy int,
+@refundedMethod varchar(50),
+@refundid int=-1 output
+AS
+BEGIN TRY
+BEGIN TRANSACTION
+	INSERT INTO tblRefund
+		(
+			invoiceId,
+			refundDate,
+			AuthorizedBy,
+			RefundedBy,
+			RefundMethod,
+			EnteredTime,
+			UpdatedTime
+		)
+	VALUES
+		(
+			@invoiceId,
+			GETDATE(),
+			@authorizedBy,
+			@refundedBy,
+			@refundedMethod,
+			GETDATE(),
+			GETDATE()
+		)
+COMMIT TRANSACTION
+SELECT @refundid = SCOPE_IDENTITY()
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		ROLLBACK TRANSACTION
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_add_damage_details]    Script Date: 10/09/2008 14:49:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:   INSERT DATA into Damage Details Table
+-- =============================================
+CREATE procedure [dbo].[uysys_product_add_damage_details]
+@damageId int, 
+@productId int, 
+@qty float, 
+@unitCost float, 
+@description  varchar(200)
+
+AS
+BEGIN TRY
+ begin transaction
+	    	INSERT INTO dbo.tblDamagedProduct
+				(
+				[Damagedid],
+				[productId],
+				[qty],
+				[unitcost],
+				[description]
+				)
+			VALUES
+				(
+				@damageId , 
+				@productId , 
+				@qty , 
+				@unitCost , 
+				@description   
+				)
+
+			UPDATE dbo.tblProduct SET
+				qtyInStock=qtyInStock-@qty
+			WHERE productId=@productId
+
+commit transaction
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_endoftheday_info]    Script Date: 10/09/2008 14:49:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   13TH SEPTEMBER 2008
+-- Description:   To END OF THE DAY SHIFT Report Information
+-- =============================================
+CREATE  procedure [dbo].[uysys_endoftheday_info]
+@UserTerminal varchar(200)
+AS
+BEGIN TRY
+	DECLARE @ToTCardAmnt float
+	DECLARE @TotCashAmnt float
+	DECLARE @TotNoSales int
+	DECLARE @Cashamount float
+
+SELECT @ToTCardAmnt=sum(ISNULL(geninfo.CardAmount,0)) , 
+	   @TotCashAmnt=sum(ISNULL(geninfo.TotalPrice,0))
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoice.userId, dbo.tblInvoice.invoiceDate, dbo.tblInvoice.TotalPrice, 
+            dbo.tblPayment.CardAmount, dbo.tblPayment.CashAmount, dbo.tblUserLogins.UserTerminal, dbo.tblUserLogins.UserLoginId,
+			dbo.tblUserLogins.UserLoginTime
+
+FROM         dbo.tblInvoice INNER JOIN
+                      dbo.tblPayment ON dbo.tblInvoice.invoiceId = dbo.tblPayment.invoiceId INNER JOIN
+                      dbo.tblUserLogins ON dbo.tblInvoice.shiftId = dbo.tblUserLogins.ShiftId)
+
+AS geninfo
+WHERE 
+geninfo.UserTerminal=@UserTerminal
+AND
+convert(nvarchar,geninfo.invoiceDate,101)=convert(nvarchar,getdate(),101)
+
+
+SELECT top 1 @Cashamount=EndMoney
+	FROM dbo.tblShift 
+	WHERE  convert(nvarchar,StartTime,101)=convert(nvarchar,GETDATE(),101)
+	AND Userterminal=@UserTerminal ORDER BY shiftId DESC
+
+--    SELECT  @ToTCardAmnt=sum(ISNULL(dbo.tblPayment.CardAmount,0)) , 
+--			@TotCashAmnt=sum(ISNULL(dbo.tblPayment.CashAmount,0))
+--	FROM    dbo.tblInvoice INNER JOIN
+--            dbo.tblPayment ON dbo.tblInvoice.invoiceId = dbo.tblPayment.invoiceId
+--			INNER JOIN
+--			(SELECT userid FROM dbo.tblUserLogins 
+--			WHERE convert(nvarchar,dbo.tblUserLogins.UserLoginTime,101)=convert(nvarchar,getdate(),101)
+--			AND UserTerminal=@UserTerminal) AS USR on dbo.tblInvoice.userid=USR.userid
+--	WHERE convert(nvarchar,EnteredTime,101)=convert(nvarchar,GETDATE(),101)
+
+	SELECT @TotNoSales=sum(ISNULL(noSalePressed,0)) FROM dbo.tblUserActivities
+	WHERE convert(nvarchar,activitydate,101)=convert(nvarchar,GETDATE(),101)
+
+	SELECT count(*) AS NoShift,
+	ISNULL(sum(ISNULL(StartMoney,0)),0) AS StartMoney,
+	ISNULL(sum(ISNULL(EndMoney,0)),0) AS EndMoney,
+	ISNULL(sum(ISNULL(TotalChangeGiven,0)),0) AS TotalChangeGiven,
+	ISNULL(sum(ISNULL(TotalSafeDrop,0)),0) AS TotalSafeDrop,
+	ISNULL(sum(ISNULL(TotalSale,0)),0) AS TotCashAmnt,
+	ISNULL(sum(ISNULL(TotalEftposSale,0)),0) AS TotalEftposSale,
+	ISNULL(sum(ISNULL(TotalCashSale,0)),0) AS TotalCashSale,
+	ISNULL(sum(ISNULL(TotalVegiSale,0)),0) AS TotalVegiSale,
+	ISNULL(sum(ISNULL(TotalGrocerySale,0)),0) AS TotalGrocerySale,
+	ISNULL(sum(ISNULL(TotalFruitSale,0)),0) AS TotalFruitSale,
+	ISNULL(sum(ISNULL(TotalFishSale,0)),0) AS TotalFishSale,
+	ISNULL(sum(ISNULL(TotalMeatSale,0)),0) AS TotalMeatSale,
+	ISNULL(sum(ISNULL(TotalDairySale,0)),0) AS TotalDairySale,
+	ISNULL(sum(ISNULL(TotalDairyOtherSale,0)),0) AS TotalDairyOtherSale,
+	ISNULL(sum(ISNULL(TotalTobaccoSale,0)),0) AS TotalTobaccoSale,
+	ISNULL(sum(ISNULL(TotalDrinksSale,0)),0) AS TotalDrinksSale,
+	ISNULL(sum(ISNULL(TotalPhoneCardSale,0)),0) AS TotalPhoneCardSale,
+	ISNULL(sum(ISNULL(TotalDVDSale,0)),0) AS TotalDVDSale,
+	ISNULL(@ToTCardAmnt,0) AS TotCardAmnt,
+	ISNULL(@TotNoSales,0) AS TotNoSales,
+	ISNULL(@Cashamount,0) AS Cashamount
+	FROM dbo.tblShift 
+	WHERE  convert(nvarchar,StartTime,101)=convert(nvarchar,GETDATE(),101)
+	AND Userterminal=@UserTerminal
+
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		RETURN 0
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_Invoice_find_by_InvoiceId]    Script Date: 10/09/2008 14:49:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        S G Mobarak
+
+-- Create date:   17TH SEPTEMBER 2008
+-- Description:   To FIND INVOICE
+-- =============================================
+CREATE PROCEDURE [dbo].[uysys_Invoice_find_by_InvoiceId]
+@invoiceId int
+AS
+BEGIN TRY
+	    	SELECT inv.*, pmt.*	FROM dbo.tblInvoice inv,dbo.tblPayment pmt 
+			WHERE (inv.invoiceId=pmt.invoiceId) AND inv.invoiceId=@invoiceId
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_shiftend_Report_info]    Script Date: 10/09/2008 14:49:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   13TH SEPTEMBER 2008
+-- Description:   To END SHIFT Report Information
+-- =============================================
+CREATE  procedure [dbo].[uysys_shiftend_Report_info]
+@shiftId int
+AS
+BEGIN TRY
+	DECLARE @ToTCardAmnt float
+	DECLARE @TotCashAmnt float
+	DECLARE @TotCashdiff float
+	DECLARE @TotNoSales int
+    
+	SELECT  @ToTCardAmnt=sum(ISNULL(dbo.tblPayment.CardAmount,0)) , 
+			@TotCashAmnt=sum(ISNULL(dbo.tblPayment.CashAmount,0))
+	FROM    dbo.tblInvoice INNER JOIN
+            dbo.tblPayment ON dbo.tblInvoice.invoiceId = dbo.tblPayment.invoiceId
+	WHERE shiftId=@shiftId 
+
+	SELECT @TotNoSales= sum(ISNULL(dbo.tblUserActivities.noSalePressed,0)) 
+	FROM   dbo.tblUserActivities INNER JOIN
+           dbo.tblUserLogins ON dbo.tblUserActivities.userLoginId = dbo.tblUserLogins.UserLoginId
+	WHERE tblUserLogins.ShiftId=@shiftId
+
+
+	SELECT @TotCashdiff=EndMoney-(TotalCashSale+TotalSafeDrop+StartMoney-TotalChangeGiven)
+	FROM dbo.tblShift 
+	WHERE shiftId=@shiftId 
+	
+	SELECT *,isnull(@ToTCardAmnt,0) AS TotCardAmnt,
+	isnull(TotalSale,0) AS TotCashAmnt,
+	isnull(@TotNoSales,0) AS TotNoSales,
+	isnull(@TotCashdiff,0) AS TotCashdiff
+	FROM dbo.tblShift 
+	WHERE shiftId=@shiftId 
+
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		RETURN 0
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_Invoice_find_by_datetime]    Script Date: 10/09/2008 14:49:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   06TH SEPTEMBER 2008
+-- Description:   To FIND INVOICE
+-- =============================================
+CREATE PROCEDURE [dbo].[uysys_Invoice_find_by_datetime]
+@FindDate DATETIME,
+@StartTime DATETIME,
+@EndTime DATETIME
+
+AS
+BEGIN TRY
+	    	SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoice.userId, dbo.tblInvoice.customerId, dbo.tblInvoice.invoiceDate, dbo.tblInvoice.TotalPrice, 
+                      dbo.tblInvoice.TotalGST, dbo.tblInvoice.changeGiven, dbo.tblInvoice.DiscountGiven, dbo.tblInvoice.DiscountAthorizedId, dbo.tblInvoice.description, 
+                      dbo.tblInvoice.status, dbo.tblPayment.Paymenttype, dbo.tblPayment.CardAmount, dbo.tblPayment.CashAmount
+FROM         dbo.tblInvoice INNER JOIN
+                      dbo.tblPayment ON dbo.tblInvoice.invoiceId = dbo.tblPayment.invoiceId
+			WHERE convert(nvarchar,invoiceDate,108) BETWEEN Convert(nvarchar,@StartTime,108)  
+			AND  Convert(nvarchar,@EndTime,108)
+			AND convert(nvarchar,invoiceDate,101)= Convert(nvarchar,@FindDate,101)
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_update_shift_information]    Script Date: 10/09/2008 14:49:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   31TH AUGUST 2008
+-- Description:   To Update Shift Information
+-- =============================================
+CREATE procedure [dbo].[uysyspos_update_shift_information]
+@shiftId int, 
+@userId int,
+@EndMoney float
+AS
+BEGIN TRY
+begin transaction
+
+DECLARE @TotalVegiSale float
+DECLARE	@TotalGrocerySale float
+DECLARE	@TotalFruitSale float
+DECLARE	@TotalFishSale float
+DECLARE	@TotalMeatSale float
+DECLARE	@TotalDairySale float
+DECLARE	@TotalDairyOtherSale float
+DECLARE	@TotalTobaccoSale float
+DECLARE	@TotalDrinksSale float
+DECLARE	@TotalPhoneCardSale float
+DECLARE	@TotalDVDSale float
+		
+----  total Vaegi sales-----------
+SELECT @TotalVegiSale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=1
+
+----  total Fruit sales-----------
+SELECT @TotalFruitSale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=2
+
+----  total Meat sales-----------
+
+SELECT @TotalMeatSale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=3
+
+
+----  total Fish sales-----------
+
+SELECT @TotalFishSale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=4
+
+----  total Drink sales-----------
+
+SELECT @TotalDrinksSale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=5
+
+----  total PhoneCard sales-----------
+
+SELECT @TotalPhoneCardSale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=6
+
+
+----  total DVD sales-----------
+
+SELECT @TotalDVDSale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=7
+
+----  total Tobacco sales-----------
+
+SELECT @TotalTobaccoSale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=8
+
+----  total Dairy sales-----------
+
+SELECT @TotalDairySale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=9
+
+----  total DairyOther sales-----------
+
+SELECT @TotalDairyOtherSale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=10
+
+
+----  total Grocer sales-----------
+
+SELECT @TotalGrocerySale=isnull(sum(qty*unitPrice),0)
+FROM
+(SELECT     dbo.tblInvoice.invoiceId, dbo.tblInvoice.shiftId, dbo.tblInvoiceProduct.productId, dbo.tblInvoiceProduct.qty, dbo.tblInvoiceProduct.unitPrice, 
+                      dbo.tblProduct.categorytId
+FROM	  dbo.tblProduct INNER JOIN
+          dbo.tblInvoice INNER JOIN
+          dbo.tblInvoiceProduct 
+		  ON dbo.tblInvoice.invoiceId = dbo.tblInvoiceProduct.invoiceId 
+		  ON dbo.tblProduct.productId = dbo.tblInvoiceProduct.productId)
+
+temptable
+WHERE shiftId=@shiftId and categorytId=11
+
+
+	UPDATE dbo.tblShift	
+	SET 
+	[EndMoney]=@EndMoney,
+	TotalVegiSale=@TotalVegiSale,
+	TotalGrocerySale=@TotalGrocerySale,
+	TotalFruitSale=@TotalFruitSale,
+	TotalFishSale=@TotalFishSale,
+	TotalMeatSale=@TotalMeatSale,
+	TotalDairySale=@TotalDairySale,
+	TotalDairyOtherSale=@TotalDairyOtherSale,
+	TotalTobaccoSale=@TotalTobaccoSale,
+	TotalDrinksSale=@TotalDrinksSale,
+	TotalPhoneCardSale=@TotalPhoneCardSale,
+	TotalDVDSale=@TotalDVDSale,
+	[EndTime]=GETDATE(),
+	[UpdatedTime]=GETDATE()
+	WHERE 	shiftId=@shiftId	
+commit transaction
+--Select SCOPE_IDENTITY()
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+
+--return @shiftId
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_add_damage_main]    Script Date: 10/09/2008 14:49:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:   INSERT DATA to Damage Master Table
+-- =============================================
+CREATE procedure [dbo].[uysys_product_add_damage_main]
+@remarks varchar(200), 
+@enteredTime datetime, 
+@enteredBy int,
+@damageId int=-1 output
+AS
+BEGIN TRY
+ begin transaction
+	    	INSERT INTO dbo.tblDamage
+				(
+				Remarks,
+				DamageDate,
+				EnteredBy,
+				EnteredTime
+				)
+			VALUES
+				(
+				@remarks,
+				@enteredTime,
+				@enteredBy,
+				GETDATE()
+				)
+commit transaction
+	select @damageId = SCOPE_IDENTITY()
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+
+return @damageId
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_store_refund_product]    Script Date: 10/09/2008 14:49:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   07TH SEPTEMBER 2008
+-- Description:   To STORE REFUND INORMATION
+-- =============================================
+CREATE PROCEDURE [dbo].[uysys_store_refund_product]
+@RefundId int,
+@productId int,
+@qty int,
+@UnitPrice float,
+@description varchar(200),
+@enteredby int
+
+AS
+BEGIN TRY
+BEGIN TRANSACTION
+	INSERT INTO dbo.tblRefundProduct
+		(
+			[RefundId],
+			[productId],
+			[qty],
+			[UnitPrice],
+			[description],
+			[EnteredBy],
+			[EnteredTime]
+		)
+	VALUES
+		(
+			@RefundId,
+			@productId,
+			@qty,
+			@UnitPrice,
+			@description,
+			@enteredby,
+			GETDATE()
+		)
+COMMIT TRANSACTION
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		ROLLBACK TRANSACTION
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_create_invoice_product]    Script Date: 10/09/2008 14:49:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:   INSERT DATA into Invoice Details Table
+-- =============================================
+Create procedure [dbo].[uysyspos_create_invoice_product]
+@invoiceId int,
+@productId int,
+@productQuantity float,
+@unitPrice float,
+@status varchar(100)
+
+AS
+BEGIN TRY
+ begin transaction
+	    	INSERT INTO dbo.tblInvoiceProduct
+				(
+				[invoiceId],
+				[productId],
+				[qty],
+				[unitPrice],
+				[Status],
+				[EnteredTime]
+				)
+			VALUES
+				(
+				@invoiceId , 
+				@productId , 
+				@productQuantity , 
+				@unitPrice , 
+				@status,
+				GETDATE()   
+				)
+
+			UPDATE dbo.tblProduct SET
+				qtyInStock=qtyInStock-@productQuantity
+			WHERE productId=@productId
+
+commit transaction
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_product_add_purchase_main]    Script Date: 10/09/2008 14:49:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:   INSERT DATA to Purchase Master Table
+-- =============================================
+CREATE procedure [dbo].[uysys_product_add_purchase_main]
+@deliveryDate datetime, 
+@supplierId int, 
+@totalCost float, 
+@enteredBy int,
+@purchaseId int = -1 output
+
+AS
+BEGIN TRY
+ begin transaction
+	    	INSERT INTO dbo.tblPurchase
+				(
+				deliveryDate,
+				supplierId,
+				totalCost,
+				enteredTime,
+				enteredBy
+				)
+			VALUES
+				(
+				@deliveryDate,
+				@supplierId,
+				@totalCost,
+				GETDATE(),
+				@enteredBy
+				)
+commit transaction
+	select @purchaseId = SCOPE_IDENTITY()
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+
+return @purchaseId
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_store_shift_information]    Script Date: 10/09/2008 14:49:39 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   31TH AUGUST 2008
+-- Description:   To Insert Shift Information
+-- =============================================
+CREATE procedure [dbo].[uysyspos_store_shift_information]
+@shiftName varchar(100),
+@userId int,
+@StartMoney float,
+@UserLoginId int,
+@UserTerminal varchar(200)
+--@shiftId int = -1 output
+AS
+BEGIN TRY
+begin transaction
+	INSERT INTO dbo.tblShift	
+	(
+		shiftName,
+		userId,
+		StartTime,
+		StartMoney,
+		EndMoney,
+		TotalChangeGiven,
+		TotalSafeDrop,
+		TotalSale,
+		TotalEftposSale,
+		TotalCashSale,
+		TotalVegiSale,
+		TotalGrocerySale,
+		TotalFruitSale,
+		TotalFishSale,
+		TotalMeatSale,
+		TotalDairySale,
+		TotalDairyOtherSale,
+		TotalTobaccoSale,
+		TotalDrinksSale,
+		TotalPhoneCardSale,
+		TotalDVDSale,
+		Userterminal
+  )
+
+VALUES
+	(
+		@shiftName,
+		@userId,
+		GETDATE(),
+		@StartMoney,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		@UserTerminal
+	)    	
+    
+	--UPDATE dbo.tblUserLogins SET ShiftId=@shiftId
+commit transaction
+	--select @shiftId = SCOPE_IDENTITY()
+	select SCOPE_IDENTITY() 
+	UPDATE dbo.tblUserLogins SET ShiftId = SCOPE_IDENTITY() where UserLoginId = @UserLoginId
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+
+--return @shiftId
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_store_safedrop_information]    Script Date: 10/09/2008 14:49:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   31TH AUGUST 2008
+-- Description:   To Store Safedrop information
+-- =============================================
+CREATE procedure [dbo].[uysyspos_store_safedrop_information]
+@shiftId int, 
+@userId int,
+@SafedropMoney float
+AS
+BEGIN TRY
+begin transaction
+	INSERT INTO dbo.tblSafeDrop (SafeDropTime,Amount,shiftId,UserId)
+    VALUES (GETDATE(),@SafedropMoney,@shiftId,@userId)
+	UPDATE dbo.tblShift	
+	SET 
+	TotalSafeDrop=TotalSafeDrop+@SafedropMoney
+	WHERE 	userId=@userId  AND  shiftId=@shiftId	
+commit transaction
+end try
+begin catch
+    if XACT_STATE() <> 0
+		rollback transaction
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_create_invoice]    Script Date: 10/09/2008 14:49:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:   INSERT DATA to Invoice Master Table
+-- =============================================
+CREATE procedure [dbo].[uysyspos_create_invoice]
+@shiftId int,
+@userId int,
+@customerId int,
+@invoiceDate datetime,
+@totalPrice float,
+@totalGst float,
+@changeGiven float,
+@discountGiven float,
+@disCountAuthorizedId int,
+@description varchar(500),
+@status varchar(200),
+@invoiceId int=-1 output
+
+AS
+BEGIN TRY
+ begin transaction
+	    	INSERT INTO dbo.tblInvoice
+				(
+				[shiftId],
+				[userId],
+				[customerId],
+				[invoiceDate],
+				[TotalPrice],
+				[TotalGST],
+				[changeGiven],
+				[DiscountGiven],
+				[DiscountAthorizedId],
+				[description],
+				[status]
+				)
+			VALUES
+				(
+				@shiftId,
+				@userId,
+				@customerId,
+				@invoiceDate,
+				@totalPrice,
+				@totalGst,
+				@changeGiven,
+				@discountGiven,
+
+				@disCountAuthorizedId,
+				@description,
+				@status
+
+				)
+
+			UPDATE dbo.tblShift
+			SET
+			TotalChangeGiven=TotalChangeGiven+@changeGiven,
+			TotalSale=TotalSale+@totalPrice
+			WHERE 
+			shiftId=@shiftId
+
+commit transaction
+	select @invoiceId = SCOPE_IDENTITY()
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+
+return @invoiceId
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_create_invoice_payment]    Script Date: 10/09/2008 14:49:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:   INSERT DATA to Invoice Payment
+-- =============================================
+CREATE procedure [dbo].[uysyspos_create_invoice_payment]
+@invoiceId int,
+@paymentType int,
+@cardAmount float,
+@cashAmount float,
+@shiftId int
+--@paymentMethodId int=-1 output
+
+AS
+BEGIN TRY
+ begin transaction
+	    	INSERT INTO dbo.tblPayment
+				(
+				[invoiceId],
+				[Paymenttype],
+				[CardAmount],
+				[CashAmount],
+				[EnteredTime]
+				)
+			VALUES
+				(
+				@invoiceId,
+				@paymentType,
+				@cardAmount,
+				@cashAmount,
+				GETDATE()
+				)
+			
+			UPDATE dbo.tblShift
+			SET
+			TotalCashSale=TotalCashSale+@cashAmount,
+			TotalEftposSale=TotalEftposSale+@cardAmount
+			WHERE 
+			shiftId=@shiftId
+
+commit transaction
+	--select @paymentMethodId = SCOPE_IDENTITY()
+	select SCOPE_IDENTITY()
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+
+--return @paymentMethodId
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_shift_cashindrawer]    Script Date: 10/09/2008 14:49:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   7TH OCTOBER 2008
+-- Description:   To CASH AMOUNT IN DRAWER
+-- =============================================
+CREATE  procedure [dbo].[uysys_shift_cashindrawer]
+@shiftId int
+AS
+BEGIN TRY
+	SELECT TotalCashSale-TotalSafeDrop+StartMoney-TotalChangeGiven totalcash FROM dbo.tblShift 
+	WHERE shiftId=@shiftId 
+
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		RETURN 0
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_create_login]    Script Date: 10/09/2008 14:49:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:    To insert a supplier
+-- =============================================
+CREATE procedure [dbo].[uysys_create_login]
+
+@shiftId int,
+@userId int,
+@userTeminal varchar(200)
+as
+begin try
+    begin transaction
+    DECLARE @RshiftId INT
+	SELECT @RshiftId=ISNULL(MAX(shiftId),0) FROM dbo.tblShift 
+	WHERE Userterminal=@userTeminal AND ISNULL(EndTime,0)=0 
+	IF (@RshiftId > 0)
+	BEGIN
+	insert into tblUserLogins(ShiftId,UserId,UserLoginTime,UserTerminal) 
+	values(@RshiftId,@userId,GETDATE(),@userTeminal)
+	END
+	ELSE
+	BEGIN
+	insert into tblUserLogins(ShiftId,UserId,UserLoginTime,UserTerminal) 
+	values(NULL,@userId,GETDATE(),@userTeminal)
+	END
+
+	UPDATE 	dbo.tblUsers SET Isloggedin=1 where userId = @userId
+
+    commit transaction
+ 
+    Select UserLoginId,ISNULL(ShiftId,0) ShiftId,UserId,UserLoginTime, UserLogoutTime,UserTerminal
+	from dbo.tblUserLogins where UserLoginId = SCOPE_IDENTITY()
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+	
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_get_nonscan_id]    Script Date: 10/09/2008 14:49:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   07TH COTOBER 2008
+-- Description:   To Get nonscan product id
+-- =============================================
+CREATE procedure [dbo].[uysys_get_nonscan_id]
+AS
+BEGIN TRY
+DECLARE @nonscanid bigint
+DECLARE @Autoid varchar(100)
+SELECT @nonscanid=isnull(MAX(convert(bigint,barcodeNo)),0)  FROM  tblProduct 
+			WHERE  barcodeNo like '99999%'
+
+IF (@nonscanid=0)
+begin
+	SET @Autoid ='9999900001';
+end
+ELSE
+begin
+	SET @Autoid =convert(varchar(100),@nonscanid+1);
+end
+
+SELECT @Autoid autoid
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_add_item]    Script Date: 10/09/2008 14:49:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        S G MOBARAK 
+-- Create date: 30TH AUGUST 2008
+-- Description:    To insert a product
+-- =============================================
+CREATE procedure [dbo].[uysyspos_add_item]
+
+@departmentId int,        
+@barcodeNo varchar(100),
+@name varchar(100),
+@shortcode varchar(50),
+@description varchar(1000),
+@brand varchar(100),
+@madeIn varchar(100),
+@weight float,
+@isGstItem bit,
+@isexpireable bit,
+@ticketType bit,
+@unitCost float,
+@unitPrice float,        
+@promoUnitPrice float,
+@promoStartDate datetime,
+@promoEndDate datetime,
+@unitMeasure int,         
+@qtyInStock float,
+@qtyInOrder float,
+@minQty float,
+@productImage Image,
+@enteredBy int,
+@productId int = -1 output
+
+as
+begin try
+    begin transaction
+
+	insert into [dbo].[tblProduct]
+	([categorytId]
+	,[barcodeNo]
+	,[name]
+	,[shortcode]
+	,[description]
+	,[brand]
+	,[madeIn]
+	,[weight]
+	,[isGstItem]
+	,[isexpireable]
+	,[ticketType]
+	,[unitCost]
+	,[unitPrice]
+	,[promoUnitPrice]
+	,[promoStartDate]
+	,[promoEndDate]
+	,[unitMeasureId]
+	,[qtyInStock]
+	,[qtyInOrder]
+	,[minQty]
+	,[ProductImage]
+	,[enteredtime]
+	,[enteredby])
+	values
+	(@departmentId
+	,@barcodeNo
+	,@name
+	,@shortcode
+	,@description
+	,@brand
+	,@madeIn
+	,@weight
+	,@isGstItem
+	,@isexpireable
+	,@ticketType
+	,@unitCost
+	,@unitPrice
+	,@promoUnitPrice
+	,@promoStartDate
+	,@promoEndDate
+	,@unitMeasure
+	,@qtyInStock
+	,@qtyInOrder
+	,@minQty
+	,@productImage
+	,GETDATE()
+	,@enteredBy)
+	
+    commit transaction
+	select @productId = SCOPE_IDENTITY()
+end try
+begin catch
+    if XACT_STATE() <> 0
+		SELECT 
+        ERROR_NUMBER() AS ErrorNumber,
+		ERROR_MESSAGE() AS ErrorMessage;
+        rollback transaction
+end catch
+
+return @productId
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_find_itemlist]    Script Date: 10/09/2008 14:49:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date: 31TH AUGUST 2008
+-- Description:    To Find  ItemList By Cateory
+-- =============================================
+CREATE procedure [dbo].[uysyspos_find_itemlist]
+@categoryId int 
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblProduct WHERE categorytId=@categoryId ORDER BY [name] ASC
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_update_item]    Script Date: 10/09/2008 14:49:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   31TH AUGUST 2008
+-- Description:   To Update a Item Table
+-- =============================================
+CREATE procedure [dbo].[uysyspos_update_item]
+	@departmentId int,        
+	@barcodeNo varchar(100),
+	@ticketType bit,
+	@name varchar(100),
+	@shortcode varchar(50),
+	@description varchar(1000),
+	@brand varchar(100),
+	@madeIn varchar(100),
+	@weight float,
+	@isGstItem bit,
+	@isexpireable bit,
+	@unitCost float,
+	@unitPrice float,        
+	@promoUnitPrice float,
+	@promoStartDate datetime,
+	@promoEndDate datetime,
+	@unitMeasure int,         
+	@qtyInStock float,
+	@qtyInOrder float,
+	@minQty float,
+	@productImage Image,
+	@updatedBy int,
+	@productId int 
+
+as
+begin try
+	begin transaction
+    	
+	UPDATE  [dbo].[tblProduct]
+	SET
+		 [categorytId]=@departmentId,
+		 [barcodeNo]=@barcodeNo,
+		 [name]=@name,
+		 [shortcode]=@shortcode,	
+		 [description]=@description,
+		 [brand]=@brand,
+		 [madeIn]=@madeIn,
+		 [weight]=@weight,
+		 [isGstItem]=@isGstItem,
+		 [isexpireable]=@isexpireable,
+		 [ticketType]=@ticketType,
+		 [unitCost]=@unitCost,
+		 [unitPrice]=@unitPrice,
+		 [promoUnitPrice]=@promoUnitPrice,
+		 [promoStartDate]=@promoStartDate,
+		 [promoEndDate]=@promoEndDate,
+		 [unitMeasureId]=@unitMeasure,
+		 [qtyInStock]=@qtyInStock,
+		 [qtyInOrder]=@qtyInOrder,
+		 [minQty]=@minQty,
+		 [ProductImage]=@productImage,
+		 [updatedtime]=GETDATE(),
+		 [updatedby]=@updatedBy
+
+	WHERE productId=@productId
+
+	commit transaction
+	end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_add_customer]    Script Date: 10/09/2008 14:49:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date: 4TH OCTOBER 2008
+-- Description:    To insert a customer
+-- =============================================
+Create procedure [dbo].[uysyspos_add_customer]
+	@Name varchar(100),
+	@street_no varchar(200),
+	@suburb varchar(100),
+	@city varchar(100),
+	@state varchar(100),
+	@postcode varchar(100),
+	@country varchar(100),
+	@mobile varchar(100),
+	@homephone varchar(100),
+	@sex bit,
+	@workphone varchar(100),
+	@enteredby int,
+	@customerId int output
+
+as
+begin try
+    begin transaction
+    	
+	insert into tblCustomer([Name],street_no,suburb,city,[state],
+	postcode,country,mobile,homephone,sex,workphone,enteredtime,enteredby) 
+	values(@Name,@street_no,@suburb,@city,@state,@postcode,
+	@country,@mobile,@homephone,@sex,@workphone,getdate(),@enteredby)
+
+    commit transaction
+	select @customerId = SCOPE_IDENTITY()
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+		SELECT 
+        ERROR_NUMBER() AS ErrorNumber,
+		ERROR_MESSAGE() AS ErrorMessage;	
+end catch
+
+return @customerId
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_get_customer_by_id]    Script Date: 10/09/2008 14:49:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   6TH OCTOBER 2008
+-- Description:    GET CUSTOMER INFO BY CUSTOMER ID
+-- =============================================
+CREATE   procedure [dbo].[uysyspos_get_customer_by_id]
+@customerId int
+AS
+BEGIN TRY
+SELECT * FROM tblCustomer WHERE customerId=@customerId
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		RETURN 0
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_update_customer]    Script Date: 10/09/2008 14:49:39 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:			Mahbubur Rahman
+-- Create date:		5TH OCTOBER 2008
+-- Description:		To UPDATE a customer
+-- =============================================
+CREATE PROCEDURE [dbo].[uysyspos_update_customer]
+	@Name varchar(100),
+	@street_no varchar(200),
+	@suburb varchar(100),
+	@city varchar(100),
+	@state varchar(100),
+	@postcode varchar(100),
+	@country varchar(100),
+	@mobile varchar(100),
+	@homephone varchar(100),
+	@sex bit,
+	@workphone varchar(100),
+	@updatedBy int,
+	@customerId int 
+
+AS
+BEGIN TRY
+    begin transaction
+    	
+	UPDATE tblCustomer SET
+	[Name]=@Name,
+	street_no=@street_no,
+	suburb=@suburb,
+	city=@city,
+	[state]=@state,
+	postcode=@postcode,
+	country=@country,
+	mobile=@mobile,
+	homephone=@homephone,
+	sex=@sex,
+	workphone=@workphone,
+	updatedtime=getdate(),
+	updatedby=@updatedBy
+	WHERE customerId=@customerId
+	
+	
+	COMMIT TRANSACTION
+    
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0
+        ROLLBACK TRANSACTION
+		SELECT 
+        ERROR_NUMBER() AS ErrorNumber,
+		ERROR_MESSAGE() AS ErrorMessage;	
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_delete_customer]    Script Date: 10/09/2008 14:49:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:			Mahbubur Rahman
+-- Create date:		5TH OCTOBER 2008
+-- Description:		To delete a customer
+-- =============================================
+
+CREATE procedure [dbo].[uysyspos_delete_customer]
+(
+	@customerId int = 0
+)
+as
+begin
+	begin try
+		
+		delete from tblCustomer where  customerId = @customerId
+	end try
+	begin catch
+		SELECT 
+        ERROR_NUMBER() AS ErrorNumber,
+		ERROR_MESSAGE() AS ErrorMessage;
+	end catch
+end
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_find_all_customer]    Script Date: 10/09/2008 14:49:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   5TH OCTOBER 2008
+-- Description:   To Find all customer
+-- =============================================
+CREATE procedure [dbo].[uysyspos_find_all_customer]
+
+AS
+BEGIN TRY
+	    	SELECT * FROM  tblCustomer ORDER BY [Name] ASC
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_find_customer_by_id]    Script Date: 10/09/2008 14:49:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:		5th october
+-- Description:    To find a customer
+-- =============================================
+CREATE procedure [dbo].[uysyspos_find_customer_by_id]
+@customerId int
+
+AS
+BEGIN TRY
+	    	SELECT * FROM  tblCustomer WHERE customerId=@customerId
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_find_customer_by_name]    Script Date: 10/09/2008 14:49:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman
+-- Create date:   5th october 2008
+-- Description:   To Find Supplier By customer Name
+-- =============================================
+CREATE procedure [dbo].[uysyspos_find_customer_by_name]
+@Name varchar(50)
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblCustomer WHERE  [Name] like '%'+@Name+'%' ORDER BY [Name] ASC
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_add_supplier]    Script Date: 10/09/2008 14:49:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        S G MOBARAK 
+-- Create date: 30TH AUGUST 2008
+-- Description:    To insert a supplier
+-- =============================================
+CREATE procedure [dbo].[uysyspos_add_supplier]
+
+	@supplierName varchar(50) = '', 
+	@tradingAs varchar(1000) = '', 
+	@abn varchar(250) = '', 
+	@supplierAddress varchar(200) = '', 
+	@contactName varchar(250) = '', 
+	@phoneNo varchar(100) = '', 
+	@email varchar(100)='',
+	@webadd varchar(250)='',
+	@comments varchar(250)='',
+	@enteredBy int = 0, 
+	@supplierId int = -1 output
+as
+begin try
+    begin transaction
+    	
+	insert into tblSupplier(SupplierName,TradingAs,ABN,SupplierAddress,ContactName,PhoneNo,email,webadd,comments,EnteredBy,EnteredTime) 
+	values(@supplierName,@tradingAs,@abn,@supplierAddress,@contactName,@phoneNo,@email,@webadd,@comments,@enteredBy,GETDATE())
+
+
+    commit transaction
+	select @supplierId = SCOPE_IDENTITY()
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+
+return @supplierId   ---Comments by Eftaker: dont need to return any value. you can trap the value from output parameter
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_update_supplier]    Script Date: 10/09/2008 14:49:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:       Mahbubur rahman
+-- Create date: 31TH AUGUST 2008
+-- Description:    To insert a supplier
+-- =============================================
+CREATE procedure [dbo].[uysyspos_update_supplier]
+
+	@supplierName varchar(50) = '', 
+	@tradingAs varchar(1000) = '', 
+	@abn varchar(250) = '', 
+	@supplierAddress varchar(200) = '', 
+	@contactName varchar(250) = '', 
+	@phoneNo varchar(100) = '', 
+	@email varchar(100)='',
+	@webadd varchar(250)='',
+	@comments varchar(250)='',
+	@updatedBy int = 0,
+    @supplierId int
+as
+begin try
+    begin transaction
+    
+	UPDATE 	tblSupplier SET
+    SupplierName=@supplierName,
+    TradingAs=@tradingAs,
+    ABN=@abn,
+    SupplierAddress=@supplierAddress,
+    ContactName=@contactName,
+    PhoneNo=@phoneNo,
+	email=@email,
+	webadd=@webadd,
+	comments=@comments,
+    UpdatedBy=@updatedBy,
+    UpdatedTime=GETDATE()
+	
+	WHERE SupplierId=@SupplierId
+	
+    commit transaction
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_update_login]    Script Date: 10/09/2008 14:49:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   1ST SEPTEMBER 2008
+-- Description:    To Update login
+-- =============================================
+CREATE procedure [dbo].[uysyspos_update_login]
+
+
+@loginId int,
+@userId int
+
+as
+begin try
+    begin transaction
+    	
+	UPDATE dbo.tblUserLogins SET UserLogoutTime=GETDATE() where UserLoginId = @loginId
+	UPDATE 	dbo.tblUsers SET Isloggedin=0 where UserId = @userId
+
+    commit transaction
+	
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_shiftend_userlist]    Script Date: 10/09/2008 14:49:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   13TH SEPTEMBER 2008
+-- Description:    To END SHIFT Report
+-- =============================================
+CREATE  procedure [dbo].[uysys_shiftend_userlist]
+@shiftId int
+AS
+BEGIN TRY
+	SELECT UL.*,U.Name FROM tblUserLogins UL,tblUsers U
+	WHERE UL.UserId=U.UserId AND UL.ShiftId=@shiftId
+
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		RETURN 0
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_endoftheday_userlist]    Script Date: 10/09/2008 14:49:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   13TH SEPTEMBER 2008
+-- Description:    To END OF THE DAY USER INFO Report
+-- =============================================
+CREATE  procedure [dbo].[uysys_endoftheday_userlist]
+@UserTerminal varchar(200)
+AS
+BEGIN TRY
+	SELECT UL.*,U.Name FROM tblUserLogins UL,tblUsers U
+	WHERE UL.UserId=U.UserId AND 
+    convert(nvarchar,UL.UserLoginTime,101)=convert(nvarchar,getdate(),101)
+	AND UL.UserTerminal=@UserTerminal
+
+END TRY
+BEGIN CATCH
+	
+    IF XACT_STATE() <> 0
+		RETURN 0
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_get_all_user]    Script Date: 10/09/2008 14:49:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        M. Arifur Rahman
+-- Create date:   28TH SEPTEMBER 2008
+-- Description:   To retrive all users
+-- =============================================
+CREATE procedure [dbo].[uysyspos_get_all_user]
+AS
+BEGIN TRY
+	    	SELECT * FROM dbo.tblUsers ORDER BY [Name]
+end try
+begin catch
+	
+    if XACT_STATE() <> 0
+		return 0
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysyspos_update_all_login_user]    Script Date: 10/09/2008 14:49:39 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        M. Arifur Rahman 
+-- Create date:   28th September
+-- Description:   To Update User Info
+-- =============================================
+CREATE procedure [dbo].[uysyspos_update_all_login_user]
+
+@Name varchar(50),
+@IsLoggedIn bit
+
+as
+begin try
+    begin transaction
+    	
+	UPDATE dbo.tblUsers SET [IsLoggedIn]= @IsLoggedIn,[UpdatedTime] = GETDATE() Where [Name] = @Name
+
+    commit transaction
+	
+end try
+begin catch
+    if XACT_STATE() <> 0
+        rollback transaction
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[uysys_get_info_from_global]    Script Date: 10/09/2008 14:49:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:        Mahbubur Rahman 
+-- Create date:   13TH SEPTEMBER 2008
+-- Description:   To show all field from Global setting
+-- =============================================
+Create procedure [dbo].[uysys_get_info_from_global]
+as
+BEGIN TRY
+	SELECT * FROM tblGlobalVar
+END TRY
+BEGIN CATCH
+    if XACT_STATE() <> 0
+	return 0
+end catch
+GO
+/****** Object:  ForeignKey [FK_tblCreditCardPayment_tblPaymentMethod]    Script Date: 10/09/2008 14:49:44 ******/
+ALTER TABLE [dbo].[tblCreditCardPayment]  WITH CHECK ADD  CONSTRAINT [FK_tblCreditCardPayment_tblPaymentMethod] FOREIGN KEY([PaymenthodId])
+REFERENCES [dbo].[tblPaymentMethod] ([PaymentMethodId])
+GO
+ALTER TABLE [dbo].[tblCreditCardPayment] CHECK CONSTRAINT [FK_tblCreditCardPayment_tblPaymentMethod]
+GO
+/****** Object:  ForeignKey [FK_tblDamagedProduct_tbldamage]    Script Date: 10/09/2008 14:49:52 ******/
+ALTER TABLE [dbo].[tblDamagedProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblDamagedProduct_tbldamage] FOREIGN KEY([Damagedid])
+REFERENCES [dbo].[tblDamage] ([Damagedid])
+GO
+ALTER TABLE [dbo].[tblDamagedProduct] CHECK CONSTRAINT [FK_tblDamagedProduct_tbldamage]
+GO
+/****** Object:  ForeignKey [FK_tblDamagedProduct_tblProduct]    Script Date: 10/09/2008 14:49:52 ******/
+ALTER TABLE [dbo].[tblDamagedProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblDamagedProduct_tblProduct] FOREIGN KEY([productId])
+REFERENCES [dbo].[tblProduct] ([productId])
+GO
+ALTER TABLE [dbo].[tblDamagedProduct] CHECK CONSTRAINT [FK_tblDamagedProduct_tblProduct]
+GO
+/****** Object:  ForeignKey [FK_tblEmployee_tblUsers]    Script Date: 10/09/2008 14:49:54 ******/
+ALTER TABLE [dbo].[tblEmployee]  WITH NOCHECK ADD  CONSTRAINT [FK_tblEmployee_tblUsers] FOREIGN KEY([userId])
+REFERENCES [dbo].[tblUsers] ([UserId])
+GO
+ALTER TABLE [dbo].[tblEmployee] CHECK CONSTRAINT [FK_tblEmployee_tblUsers]
+GO
+/****** Object:  ForeignKey [FK_tblGroups_tblRoles]    Script Date: 10/09/2008 14:49:59 ******/
+ALTER TABLE [dbo].[tblGroups]  WITH CHECK ADD  CONSTRAINT [FK_tblGroups_tblRoles] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[tblRoles] ([RoleId])
+GO
+ALTER TABLE [dbo].[tblGroups] CHECK CONSTRAINT [FK_tblGroups_tblRoles]
+GO
+/****** Object:  ForeignKey [FK_tblInvoice_tblShift]    Script Date: 10/09/2008 14:50:04 ******/
+ALTER TABLE [dbo].[tblInvoice]  WITH CHECK ADD  CONSTRAINT [FK_tblInvoice_tblShift] FOREIGN KEY([shiftId])
+REFERENCES [dbo].[tblShift] ([shiftId])
+GO
+ALTER TABLE [dbo].[tblInvoice] CHECK CONSTRAINT [FK_tblInvoice_tblShift]
+GO
+/****** Object:  ForeignKey [FK_tblInvoice_tblUsers]    Script Date: 10/09/2008 14:50:04 ******/
+ALTER TABLE [dbo].[tblInvoice]  WITH NOCHECK ADD  CONSTRAINT [FK_tblInvoice_tblUsers] FOREIGN KEY([userId])
+REFERENCES [dbo].[tblUsers] ([UserId])
+GO
+ALTER TABLE [dbo].[tblInvoice] CHECK CONSTRAINT [FK_tblInvoice_tblUsers]
+GO
+/****** Object:  ForeignKey [FK_tblInvoiceProduct_tblInvoice]    Script Date: 10/09/2008 14:50:06 ******/
+ALTER TABLE [dbo].[tblInvoiceProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblInvoiceProduct_tblInvoice] FOREIGN KEY([invoiceId])
+REFERENCES [dbo].[tblInvoice] ([invoiceId])
+GO
+ALTER TABLE [dbo].[tblInvoiceProduct] CHECK CONSTRAINT [FK_tblInvoiceProduct_tblInvoice]
+GO
+/****** Object:  ForeignKey [FK_tblInvoiceProduct_tblProduct]    Script Date: 10/09/2008 14:50:06 ******/
+ALTER TABLE [dbo].[tblInvoiceProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblInvoiceProduct_tblProduct] FOREIGN KEY([productId])
+REFERENCES [dbo].[tblProduct] ([productId])
+GO
+ALTER TABLE [dbo].[tblInvoiceProduct] CHECK CONSTRAINT [FK_tblInvoiceProduct_tblProduct]
+GO
+/****** Object:  ForeignKey [FK_tblPayment_tblInvoice]    Script Date: 10/09/2008 14:50:10 ******/
+ALTER TABLE [dbo].[tblPayment]  WITH CHECK ADD  CONSTRAINT [FK_tblPayment_tblInvoice] FOREIGN KEY([invoiceId])
+REFERENCES [dbo].[tblInvoice] ([invoiceId])
+GO
+ALTER TABLE [dbo].[tblPayment] CHECK CONSTRAINT [FK_tblPayment_tblInvoice]
+GO
+/****** Object:  ForeignKey [FK_tblProduct_tblProduct]    Script Date: 10/09/2008 14:50:20 ******/
+ALTER TABLE [dbo].[tblProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblProduct_tblProduct] FOREIGN KEY([productId])
+REFERENCES [dbo].[tblProduct] ([productId])
+GO
+ALTER TABLE [dbo].[tblProduct] CHECK CONSTRAINT [FK_tblProduct_tblProduct]
+GO
+/****** Object:  ForeignKey [FK_tblProduct_tblProductCategory]    Script Date: 10/09/2008 14:50:20 ******/
+ALTER TABLE [dbo].[tblProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblProduct_tblProductCategory] FOREIGN KEY([categorytId])
+REFERENCES [dbo].[tblProductCategory] ([categoryId])
+GO
+ALTER TABLE [dbo].[tblProduct] CHECK CONSTRAINT [FK_tblProduct_tblProductCategory]
+GO
+/****** Object:  ForeignKey [FK_tblProduct_tblUnitMeasure]    Script Date: 10/09/2008 14:50:20 ******/
+ALTER TABLE [dbo].[tblProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblProduct_tblUnitMeasure] FOREIGN KEY([unitMeasureId])
+REFERENCES [dbo].[tblUnitMeasure] ([unitMeasureId])
+GO
+ALTER TABLE [dbo].[tblProduct] CHECK CONSTRAINT [FK_tblProduct_tblUnitMeasure]
+GO
+/****** Object:  ForeignKey [FK_tblPurchase_tblSupplier]    Script Date: 10/09/2008 14:50:25 ******/
+ALTER TABLE [dbo].[tblPurchase]  WITH CHECK ADD  CONSTRAINT [FK_tblPurchase_tblSupplier] FOREIGN KEY([supplierId])
+REFERENCES [dbo].[tblSupplier] ([SupplierId])
+GO
+ALTER TABLE [dbo].[tblPurchase] CHECK CONSTRAINT [FK_tblPurchase_tblSupplier]
+GO
+/****** Object:  ForeignKey [FK_tblPurchaseProduct_tblProduct]    Script Date: 10/09/2008 14:50:26 ******/
+ALTER TABLE [dbo].[tblPurchaseProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblPurchaseProduct_tblProduct] FOREIGN KEY([productId])
+REFERENCES [dbo].[tblProduct] ([productId])
+GO
+ALTER TABLE [dbo].[tblPurchaseProduct] CHECK CONSTRAINT [FK_tblPurchaseProduct_tblProduct]
+GO
+/****** Object:  ForeignKey [FK_tblPurchaseProduct_tblPurchase]    Script Date: 10/09/2008 14:50:26 ******/
+ALTER TABLE [dbo].[tblPurchaseProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblPurchaseProduct_tblPurchase] FOREIGN KEY([purchaseId])
+REFERENCES [dbo].[tblPurchase] ([purchaseId])
+GO
+ALTER TABLE [dbo].[tblPurchaseProduct] CHECK CONSTRAINT [FK_tblPurchaseProduct_tblPurchase]
+GO
+/****** Object:  ForeignKey [FK_tblRefund_tblInvoice]    Script Date: 10/09/2008 14:50:28 ******/
+ALTER TABLE [dbo].[tblRefund]  WITH CHECK ADD  CONSTRAINT [FK_tblRefund_tblInvoice] FOREIGN KEY([invoiceId])
+REFERENCES [dbo].[tblInvoice] ([invoiceId])
+GO
+ALTER TABLE [dbo].[tblRefund] CHECK CONSTRAINT [FK_tblRefund_tblInvoice]
+GO
+/****** Object:  ForeignKey [FK_tblRefund_tblInvoice1]    Script Date: 10/09/2008 14:50:29 ******/
+ALTER TABLE [dbo].[tblRefund]  WITH CHECK ADD  CONSTRAINT [FK_tblRefund_tblInvoice1] FOREIGN KEY([invoiceId])
+REFERENCES [dbo].[tblInvoice] ([invoiceId])
+GO
+ALTER TABLE [dbo].[tblRefund] CHECK CONSTRAINT [FK_tblRefund_tblInvoice1]
+GO
+/****** Object:  ForeignKey [FK_tblRefundProduct_tblProduct]    Script Date: 10/09/2008 14:50:31 ******/
+ALTER TABLE [dbo].[tblRefundProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblRefundProduct_tblProduct] FOREIGN KEY([productId])
+REFERENCES [dbo].[tblProduct] ([productId])
+GO
+ALTER TABLE [dbo].[tblRefundProduct] CHECK CONSTRAINT [FK_tblRefundProduct_tblProduct]
+GO
+/****** Object:  ForeignKey [FK_tblRefundProduct_tblRefund]    Script Date: 10/09/2008 14:50:31 ******/
+ALTER TABLE [dbo].[tblRefundProduct]  WITH CHECK ADD  CONSTRAINT [FK_tblRefundProduct_tblRefund] FOREIGN KEY([Refundid])
+REFERENCES [dbo].[tblRefund] ([Refundid])
+GO
+ALTER TABLE [dbo].[tblRefundProduct] CHECK CONSTRAINT [FK_tblRefundProduct_tblRefund]
+GO
+/****** Object:  ForeignKey [FK_tblRolePermissions_tblPermissions]    Script Date: 10/09/2008 14:50:32 ******/
+ALTER TABLE [dbo].[tblRolePermissions]  WITH CHECK ADD  CONSTRAINT [FK_tblRolePermissions_tblPermissions] FOREIGN KEY([PermissionId])
+REFERENCES [dbo].[tblPermissions] ([PermissionId])
+GO
+ALTER TABLE [dbo].[tblRolePermissions] CHECK CONSTRAINT [FK_tblRolePermissions_tblPermissions]
+GO
+/****** Object:  ForeignKey [FK_tblRolePermissions_tblRoles]    Script Date: 10/09/2008 14:50:33 ******/
+ALTER TABLE [dbo].[tblRolePermissions]  WITH CHECK ADD  CONSTRAINT [FK_tblRolePermissions_tblRoles] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[tblRoles] ([RoleId])
+GO
+ALTER TABLE [dbo].[tblRolePermissions] CHECK CONSTRAINT [FK_tblRolePermissions_tblRoles]
+GO
+/****** Object:  ForeignKey [FK_tblSafeDrop_tblShift]    Script Date: 10/09/2008 14:50:36 ******/
+ALTER TABLE [dbo].[tblSafeDrop]  WITH CHECK ADD  CONSTRAINT [FK_tblSafeDrop_tblShift] FOREIGN KEY([shiftId])
+REFERENCES [dbo].[tblShift] ([shiftId])
+GO
+ALTER TABLE [dbo].[tblSafeDrop] CHECK CONSTRAINT [FK_tblSafeDrop_tblShift]
+GO
+/****** Object:  ForeignKey [FK_tblShift_tblUsers]    Script Date: 10/09/2008 14:50:41 ******/
+ALTER TABLE [dbo].[tblShift]  WITH NOCHECK ADD  CONSTRAINT [FK_tblShift_tblUsers] FOREIGN KEY([userId])
+REFERENCES [dbo].[tblUsers] ([UserId])
+GO
+ALTER TABLE [dbo].[tblShift] CHECK CONSTRAINT [FK_tblShift_tblUsers]
+GO
+/****** Object:  ForeignKey [FK_tblUserActivities_tblUserLogins]    Script Date: 10/09/2008 14:50:49 ******/
+ALTER TABLE [dbo].[tblUserActivities]  WITH CHECK ADD  CONSTRAINT [FK_tblUserActivities_tblUserLogins] FOREIGN KEY([userLoginId])
+REFERENCES [dbo].[tblUserLogins] ([UserLoginId])
+GO
+ALTER TABLE [dbo].[tblUserActivities] CHECK CONSTRAINT [FK_tblUserActivities_tblUserLogins]
+GO
+/****** Object:  ForeignKey [FK_tblUserGroups_tblGroups]    Script Date: 10/09/2008 14:50:51 ******/
+ALTER TABLE [dbo].[tblUserGroups]  WITH CHECK ADD  CONSTRAINT [FK_tblUserGroups_tblGroups] FOREIGN KEY([GroupId])
+REFERENCES [dbo].[tblGroups] ([GroupId])
+GO
+ALTER TABLE [dbo].[tblUserGroups] CHECK CONSTRAINT [FK_tblUserGroups_tblGroups]
+GO
+/****** Object:  ForeignKey [FK_tblUserGroups_tblUsers]    Script Date: 10/09/2008 14:50:51 ******/
+ALTER TABLE [dbo].[tblUserGroups]  WITH NOCHECK ADD  CONSTRAINT [FK_tblUserGroups_tblUsers] FOREIGN KEY([UserId])
+REFERENCES [dbo].[tblUsers] ([UserId])
+GO
+ALTER TABLE [dbo].[tblUserGroups] CHECK CONSTRAINT [FK_tblUserGroups_tblUsers]
+GO
+/****** Object:  ForeignKey [FK_tblUserLoginAttempts_tblUserLogins]    Script Date: 10/09/2008 14:50:54 ******/
+ALTER TABLE [dbo].[tblUserLoginAttempts]  WITH CHECK ADD  CONSTRAINT [FK_tblUserLoginAttempts_tblUserLogins] FOREIGN KEY([UserLoginId])
+REFERENCES [dbo].[tblUserLogins] ([UserLoginId])
+GO
+ALTER TABLE [dbo].[tblUserLoginAttempts] CHECK CONSTRAINT [FK_tblUserLoginAttempts_tblUserLogins]
+GO
+/****** Object:  ForeignKey [FK_tblUserLogins_tblShift]    Script Date: 10/09/2008 14:50:55 ******/
+ALTER TABLE [dbo].[tblUserLogins]  WITH CHECK ADD  CONSTRAINT [FK_tblUserLogins_tblShift] FOREIGN KEY([ShiftId])
+REFERENCES [dbo].[tblShift] ([shiftId])
+GO
+ALTER TABLE [dbo].[tblUserLogins] CHECK CONSTRAINT [FK_tblUserLogins_tblShift]
+GO
+/****** Object:  ForeignKey [FK_tblUserLogins_tblUsers]    Script Date: 10/09/2008 14:50:55 ******/
+ALTER TABLE [dbo].[tblUserLogins]  WITH NOCHECK ADD  CONSTRAINT [FK_tblUserLogins_tblUsers] FOREIGN KEY([UserId])
+REFERENCES [dbo].[tblUsers] ([UserId])
+GO
+ALTER TABLE [dbo].[tblUserLogins] CHECK CONSTRAINT [FK_tblUserLogins_tblUsers]
+GO
+

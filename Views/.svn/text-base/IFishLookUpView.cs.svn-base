@@ -1,0 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using UYSYSPOS.BusinessObjects;
+
+namespace UYSYSPOS.Views
+{
+    public interface IFishLookUpView
+    {
+        void DisplayFishList(List<CProduct> oLstProduct);
+        void Alert(string msg);
+    }
+}

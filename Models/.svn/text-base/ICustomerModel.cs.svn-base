@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using UYSYSPOS.BusinessObjects;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace UYSYSPOS.Models
+{
+    public interface ICustomerModel
+    {
+
+        DataSet getCustomerList();
+        DataSet getCustomerListLikeName(string sName);
+        SqlDataReader getCustomerById(int iCustomerId);
+
+        /// <summary>
+        /// For Customer entry Form
+        /// </summary>
+        int addCustomer(Customer oCustomer);
+        int deleteCustomer(Customer oCustomer);
+        void updateCustomer(Customer oCustomer);
+    }
+}

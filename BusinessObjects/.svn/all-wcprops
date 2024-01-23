@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/uysysposrepo/!svn/ver/190/BusinessObjects
+END
+RstPrinter.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/uysysposrepo/!svn/ver/188/BusinessObjects/RstPrinter.cs
+END
+CInvoice.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/uysysposrepo/!svn/ver/43/BusinessObjects/CInvoice.cs
+END
+CStore.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/uysysposrepo/!svn/ver/11/BusinessObjects/CStore.cs
+END
+CUser.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/uysysposrepo/!svn/ver/44/BusinessObjects/CUser.cs
+END
+Customer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/uysysposrepo/!svn/ver/132/BusinessObjects/Customer.cs
+END
+CKeyboard.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/uysysposrepo/!svn/ver/134/BusinessObjects/CKeyboard.cs
+END
+CProduct.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/uysysposrepo/!svn/ver/148/BusinessObjects/CProduct.cs
+END
+Supplier.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/uysysposrepo/!svn/ver/143/BusinessObjects/Supplier.cs
+END
+CDepartment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/uysysposrepo/!svn/ver/42/BusinessObjects/CDepartment.cs
+END
+CPrinter.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/uysysposrepo/!svn/ver/190/BusinessObjects/CPrinter.cs
+END
+PosConfiguration.cs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/uysysposrepo/!svn/ver/96/BusinessObjects/PosConfiguration.cs
+END
+CUnitMessurement.cs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/uysysposrepo/!svn/ver/48/BusinessObjects/CUnitMessurement.cs
+END

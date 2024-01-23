@@ -1,0 +1,311 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using UYSYSPOS.BusinessObjects;
+using UYSYSPOS.Models;
+using UYSYSPOS.Views;
+using UYSYSPOS.Controllers;
+
+namespace UYSYSPOS.Factories
+{
+    #region Factories
+    /// <summary>
+    ///Used a simple Factory pattern here to create Models and Controllers
+    /// </summary>
+    public class Factory
+    {
+        /// <summary>
+        /// Reference of IProductModel
+        /// have the factory 
+        /// </summary>
+        private static UYSYSPOS.Models.IProductModel _ProductModel;
+      
+
+        /// <summary>
+        /// Get's an instatiated IProductModel object
+        /// </summary>
+        /// <returns></returns>
+        public static UYSYSPOS.Models.IProductModel GetProductModel()
+        {
+
+            if (_ProductModel == null)
+            {
+                _ProductModel = new UYSYSPOS.Models.ProductModel();
+            }
+            return _ProductModel;
+        }
+
+
+        /// <summary>
+        /// Get's an instantiated IProductManager object
+        /// </summary>
+        /// <param name="VegetableLookUpView">reference to view using controller for callbacks</param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.IProductManager GetProductManager(UYSYSPOS.Views.IVegetableLookUpView _VegetableLookUpView)
+        {
+            return new UYSYSPOS.Controllers.ProductManager(_VegetableLookUpView);
+
+        }
+
+        /// <summary>
+        /// Get's an instantiated IProductManager object
+        /// </summary>
+        /// <param name="FruitLookUpview"></param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.IProductManager GetProductManager(UYSYSPOS.Views.IFruitLookUpView _FruitLookUpview)
+        {
+            return new UYSYSPOS.Controllers.ProductManager(_FruitLookUpview);
+        }
+
+        /// <summary>
+        /// Get's an instantiated IProductManager object
+        /// </summary>
+        /// <param name="VegetableLookUpView">reference to view using controller for callbacks</param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.IProductManager GetProductManager(UYSYSPOS.Views.IMeatLookUpView _MeatLookUpView)
+        {
+            return new UYSYSPOS.Controllers.ProductManager(_MeatLookUpView);
+
+        }
+
+        /// <summary>
+        /// Get's an instantiated IProductManager object
+        /// </summary>
+        /// <param name="VegetableLookUpView">reference to view using controller for callbacks</param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.IProductManager GetProductManager(UYSYSPOS.Views.IFishLookUpView _FishLookUpView)
+        {
+            return new UYSYSPOS.Controllers.ProductManager(_FishLookUpView);
+
+        }
+
+
+        /// <summary>
+        /// Get's instantiated IProductManager Object
+        /// </summary>
+        /// <param name="_PluView"></param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.IProductManager GetProductManager(UYSYSPOS.Views.IPluView _PluView)
+        {
+            return new UYSYSPOS.Controllers.ProductManager(_PluView);
+        }
+
+        /// <summary>
+        /// Get's instantiated IProductManager Object for ItemView
+        /// </summary>
+        /// <param name="_ItemView"></param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.IProductManager GetProductManager(UYSYSPOS.Views.IItemView _ItemView)
+        {
+            return new UYSYSPOS.Controllers.ProductManager(_ItemView);
+        }
+
+
+        /// <summary>
+        /// Get's instantiated IProductManager Object for IMainView
+        /// </summary>
+        /// <param name="_ItemView"></param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.IProductManager GetProductManager(UYSYSPOS.Views.IMainView _IMainView)
+        {
+            return new UYSYSPOS.Controllers.ProductManager(_IMainView);
+        }
+
+    
+        
+        /// <summary>
+        /// Reference of ISecurityModel
+        /// have the factory 
+        /// </summary>
+        private static UYSYSPOS.Models.ISecurityModel _SecurityModel;
+
+        /// <summary>
+        /// Get's an instatiated ISecurityModelobject
+        /// </summary>
+        /// <returns></returns>
+        public static UYSYSPOS.Models.ISecurityModel GetSecurityModel()
+        {
+
+            if (_SecurityModel == null)
+            {
+                _SecurityModel = new UYSYSPOS.Models.SecurityModel();
+            }
+            return _SecurityModel;
+        }
+
+        /// <summary>
+        ///  Get's instantiated ISecurityManager Object for ILoginView
+        /// </summary>
+        /// <param name="_LoginView"></param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.ISecurityManager GetSecurityManager(UYSYSPOS.Views.ILoginView _LoginView)
+        {
+            return new UYSYSPOS.Controllers.SecurityManager(_LoginView);
+        }
+
+        /// <summary>
+        ///  Get's instantiated ISalesManager Object for IDBSettingsView
+        /// </summary>
+        /// <param name="_DBSettingsView"></param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.ISecurityManager GetSecurityManager(UYSYSPOS.Views.IDBSettingsView _DBSettingsView)
+        {
+            return new UYSYSPOS.Controllers.SecurityManager(_DBSettingsView);
+        }
+
+
+        /// <summary>
+        ///  Get's instantiated ISalesManager Object for IDBSettingsView
+        /// </summary>
+        /// <param name="_DBSettingsView"></param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.ISecurityManager GetSecurityManager(UYSYSPOS.Views.IMainView _MainView)
+        {
+            return new UYSYSPOS.Controllers.SecurityManager(_MainView);
+        }
+
+
+        public static UYSYSPOS.Controllers.ISecurityManager GetSecurityManager(UYSYSPOS.Views.IAuthorization _Authorization)
+        {
+            return new UYSYSPOS.Controllers.SecurityManager(_Authorization);
+        }
+
+        /// <summary>
+        /// Reference of ISalesModel
+        /// have the factory 
+        /// </summary>
+        private static UYSYSPOS.Models.ISalesModel _SalesModel;
+
+        /// <summary>
+        /// Get's an instatiated ISalesModel
+        /// </summary>
+        /// <returns></returns>
+        public static UYSYSPOS.Models.ISalesModel GetSalesModel()
+        {
+
+            if (_SalesModel == null)
+            {
+                _SalesModel = new UYSYSPOS.Models.SalesModel();
+            }
+            return _SalesModel;
+        }
+
+        /// <summary>
+        /// Get's instantiated ISalesManager Object for IShiftStartView
+        /// </summary>
+        /// <param name="_ShiftStartView"></param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.ISalesManager GetSalesManager(UYSYSPOS.Views.IShiftStartView _ShiftStartView)
+        {
+            return new UYSYSPOS.Controllers.SalesManager(_ShiftStartView);
+        }
+
+
+
+        /// <summary>
+        /// Get's instantiated ISalesManager Object for IShiftEndView
+      /// </summary>
+      /// <param name="_ShiftEndView"></param>
+      /// <returns></returns>
+        public static UYSYSPOS.Controllers.ISalesManager GetSalesManager(UYSYSPOS.Views.IShiftEndView _ShiftEndView)
+        {
+            return new UYSYSPOS.Controllers.SalesManager(_ShiftEndView);
+        }
+
+
+        /// <summary>
+        ///  Get's instantiated ISalesManager Object for ISafeFundView
+       /// </summary>
+       /// <param name="_SafeFundView"></param>
+       /// <returns></returns>
+        public static UYSYSPOS.Controllers.ISalesManager GetSalesManager(UYSYSPOS.Views.ISafeFundView _SafeFundView)
+        {
+            return new UYSYSPOS.Controllers.SalesManager(_SafeFundView);
+        }
+
+        /// <summary>
+        ///  Get's instantiated ISalesManager Object for ISafeFundView
+        /// </summary>
+        /// <param name="_SafeFundView"></param>
+        /// <returns></returns>
+        public static UYSYSPOS.Controllers.ISalesManager GetSalesManager(UYSYSPOS.Views.IMainView _MainView)
+        {
+            return new UYSYSPOS.Controllers.SalesManager(_MainView);
+        }
+
+        public static UYSYSPOS.Controllers.ISalesManager GetSalesManager(UYSYSPOS.Views.IRefundView _RefundView)
+        {
+            return new UYSYSPOS.Controllers.SalesManager(_RefundView);
+        }
+
+
+
+
+        #region SupplierModel and SupplierManager Bridge
+        /// <summary>
+        /// Reference of ISupplierModel
+        /// have the factory 
+        /// </summary>
+        private static ISupplierModel _SupplierModel;
+
+        /// <summary>
+        /// Get's an instatiated ISupplierModel object
+        /// </summary>
+        /// <returns></returns>
+        public static ISupplierModel GetSupplierModel()
+        {
+
+            if (_SupplierModel == null)
+            {
+                _SupplierModel = new UYSYSPOS.Models.SupplierModel();
+            }
+            return _SupplierModel;
+        }
+
+        /// <summary>
+        /// Get's an instantiated ISupplierModel object
+        /// </summary>
+        /// <param name="SupplierView">reference to view using controller for callbacks</param>
+        /// <returns></returns>
+        public static ISupplierManager GetSuppilerManager(ISupplierView _SupplierView)
+        {
+            return new SupplierManager(_SupplierView);
+        }
+        #endregion
+
+      #region CustomerModel and CustomerManager Bridge
+        /// <summary>
+        /// Reference of ICustomerModel
+        /// have the factory 
+        /// </summary>
+        private static ICustomerModel _CustomerModel;
+
+        /// <summary>
+        /// Get's an instatiated ICustomerModel object
+        /// </summary>
+        /// <returns></returns>
+        public static ICustomerModel GetCusomerModel()
+        {
+
+            if (_CustomerModel == null)
+            {
+                _CustomerModel = new UYSYSPOS.Models.CustomerModel();
+            }
+            return _CustomerModel;
+        }
+
+        /// <summary>
+        /// Get's an instantiated ICustomerModel object
+        /// </summary>
+        /// <param name="SupplierView">reference to view using controller for callbacks</param>
+        /// <returns></returns>
+        public static ICustomerManager GetCustomerManager(ICustomerView _CustomerView)
+        {
+            return new CustomerManager(_CustomerView);
+        }
+        #endregion
+
+    }
+    #endregion
+
+}

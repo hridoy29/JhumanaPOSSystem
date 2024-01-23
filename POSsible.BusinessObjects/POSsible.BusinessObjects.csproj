@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{86FD73D9-EF0D-4461-B199-C225A0B5D587}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>POSsible.BusinessObjects</RootNamespace>
+    <AssemblyName>POSsible.BusinessObjects</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountLedger.cs" />
+    <Compile Include="ACCTransaction.cs" />
+    <Compile Include="Bank.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="CreditCollection.cs" />
+    <Compile Include="DailyTransaction.cs" />
+    <Compile Include="Invoice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="JournalVoucherDetail.cs" />
+    <Compile Include="JournalVoucherMain.cs" />
+    <Compile Include="LedgerGroup.cs" />
+    <Compile Include="PageList.cs" />
+    <Compile Include="PaymentVoucherDetail.cs" />
+    <Compile Include="PaymentVoucherMain.cs" />
+    <Compile Include="ProductPromotion.cs" />
+    <Compile Include="ProjectInfo.cs" />
+    <Compile Include="PurchasePayment.cs" />
+    <Compile Include="PurchaseReturn.cs" />
+    <Compile Include="PurchaseReturnDetail.cs" />
+    <Compile Include="ReceiptVoucherDetail.cs" />
+    <Compile Include="ReceiptVoucherMain.cs" />
+    <Compile Include="Roles.cs" />
+    <Compile Include="RoleWisePermission.cs" />
+    <Compile Include="Shift.cs" />
+    <Compile Include="Store.cs" />
+    <Compile Include="tblCustomer.cs" />
+    <Compile Include="InvoiceProduct.cs" />
+    <Compile Include="ProductCategory.cs" />
+    <Compile Include="Purchase.cs" />
+    <Compile Include="PurchaseProduct.cs" />
+    <Compile Include="Refund.cs" />
+    <Compile Include="RefundProduct.cs" />
+    <Compile Include="Supplier.cs" />
+    <Compile Include="Transaction.cs" />
+    <Compile Include="TransactionPurpose.cs" />
+    <Compile Include="UnitMeasure.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="SorterMode.cs" />
+    <Compile Include="UserLogins.cs" />
+    <Compile Include="Users.cs" />
+    <Compile Include="Utilities.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/uysysposrepo/!svn/ver/177/Controllers
+END
+ISalesManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/uysysposrepo/!svn/ver/151/Controllers/ISalesManager.cs
+END
+ISecurityManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/uysysposrepo/!svn/ver/73/Controllers/ISecurityManager.cs
+END
+ProductManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/uysysposrepo/!svn/ver/148/Controllers/ProductManager.cs
+END
+CustomerManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/uysysposrepo/!svn/ver/148/Controllers/CustomerManager.cs
+END
+SupplierManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/uysysposrepo/!svn/ver/143/Controllers/SupplierManager.cs
+END
+IUserManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/uysysposrepo/!svn/ver/10/Controllers/IUserManager.cs
+END
+SalesManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/uysysposrepo/!svn/ver/177/Controllers/SalesManager.cs
+END
+SecurityManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/uysysposrepo/!svn/ver/80/Controllers/SecurityManager.cs
+END
+IProductManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/uysysposrepo/!svn/ver/128/Controllers/IProductManager.cs
+END
+ICustomerManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/uysysposrepo/!svn/ver/132/Controllers/ICustomerManager.cs
+END
+ISupplierManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/uysysposrepo/!svn/ver/123/Controllers/ISupplierManager.cs
+END
+UserManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/uysysposrepo/!svn/ver/130/Controllers/UserManager.cs
+END
